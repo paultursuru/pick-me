@@ -1,12 +1,27 @@
-<h2 class="text-2xl text-white">
-  <%= @flat.name %>
-</h2>
-<div class="bg-white text-emerald-950 my-2 p-2 rounded">
-  <p class="">
-    <%= @flat.address %>
-  </p>
-  <% @flat.invited_users.each do |user| %>
-    <%= user.email %>
+<%= link_to dashboard_path, class:'text-xs underline text-white mb-2' do %>
+  <i class="fa-solid fa-arrow-left"></i>
+  back to your dashboard
+<% end %>
+
+<div class="my-2">
+  <h2 class="text-2xl text-white"><%= @flat.name %></h2>
+  <p class="text-white"><%= @flat.address %></p>
+</div>
+
+<div class="bg-white text-emerald-950 my-2 p-4 rounded">
+  <div class="flex justify-between items-center mb-2">
+    <h3 class="text-lg">Invited friends</h3>
+
+    <%= link_to new_flat_invitation_path(@flat), class:'text-xs px-2 rounded text-emerald-100 bg-emerald-500', data: { turbo_frame: dom_id(@invitation) } do %>
+      <i class="fa-solid fa-user-plus"></i>
+      Invite a friend
+    <% end %>
+  </div>
+
+  <%= turbo_frame_tag @invitation %>
+
+  <%= turbo_frame_tag "invitations" do %>
+    <%= render @invitations %>
   <% end %>
 </div>
 

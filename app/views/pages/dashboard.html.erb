@@ -1,5 +1,5 @@
 <div class="flex justify-between items-center text-white mb-2">
-  <h2 class="text-lg font-bold mr-2">Hello, <%= current_user.email %></h2>
+  <h2 class="text-lg font-bold mr-2">Hello, <%= current_user.nickname %></h2>
   <%= link_to "New flat",
                   new_flat_path,
                   class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
@@ -9,5 +9,13 @@
 <%= turbo_frame_tag @flat %>
 
 <%= turbo_frame_tag "flats" do %>
-  <%= render @flats %>
+
+  <% if @flats.any? %>
+    <%= render @flats %>
+  <% else %>
+    <div class="bg-white rounded p-4 mt-2">
+      <p class="text-black">You don't have any flats yet. Create one!</p>
+    </div>
+  <% end %>
+
 <% end %>
