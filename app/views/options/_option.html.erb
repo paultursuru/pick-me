@@ -1,0 +1,19 @@
+<%= turbo_frame_tag option , class:'group' do %>
+  <div class="flex flex-col justify-between items-center border relative">
+      <%= cl_image_tag option.image.key if option.image.attached? %>
+      <div class='flex flex-col justify-center items-center'>
+        <h3 class="text-lg font-bold"><%= option.name %> - <%= option.price %>€</h3>
+        <p class="text-sm"><%= option.description %></p>
+        <p class="text-sm"><%= option.size %></p>
+      </div>
+    <div class="flex overflow-hidden w-0 transition duration-300 group-hover:w-max absolute top-0 right-0">
+      <%= button_to "❌",
+                    item_option_path(@item, option),
+                    method: :delete,
+                    class: "opacity-0 transition duration-300 group-hover:opacity-100 p-0 group-hover:px-1" %>
+      <%= link_to "✏️",
+                  edit_item_option_path(@item, option),
+                  class: "opacity-0 transition duration-300 group-hover:opacity-100 p-0 group-hover:px-1" %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,13 @@
+<%= simple_form_for flat do |f| %>
+  <% if flat.errors.any? %>
+    <div class="error-message">
+      <%= flat.errors.full_messages.to_sentence.capitalize %>
+    </div>
+  <% end %>
+  <%= f.input :name, label: false, placeholder: "name this flat" %>
+  <%= f.input :address, label: false, placeholder: "12 rue Machin, Paris" %>
+  <div class="flex">
+    <%= f.submit 'save', class: 'text-white bg-emerald-600 py-1 px-4 rounded' %>
+    <%= link_to "cancel", dashboard_path, class: "text-white bg-red-800 py-1 px-4 rounded ml-2" %>
+  </div>
+<% end %>

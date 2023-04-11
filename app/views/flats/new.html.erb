@@ -1,0 +1,5 @@
+<h2 class="text-xl font-bold">New Flat</h2>
+
+<%= turbo_frame_tag @flat do %>
+  <%= render "form", flat: @flat %>
+<% end %>

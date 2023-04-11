@@ -1,0 +1,20 @@
+<%= link_to flat_path(@flat), class:'text-xs underline text-white mb-2' do %>
+  <i class="fa-solid fa-arrow-left"></i>
+  back to your flat
+<% end %>
+<div class="bg-white text-emerald-950 my-2 p-4 rounded">
+  <div class="flex justify-between items-center mb-2">
+    <h2 class="text-xl">All options for <span class="underline offset-2"><%= @item.name %></span> </h2>
+    <%= link_to "New option",
+                    new_item_option_path(@item, @option),
+                    class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-sm",
+                    data: { turbo_frame: dom_id(@option) } %>
+  </div>
+
+  <div class="flex flex-col">
+    <%= turbo_frame_tag @option, class: 'grid grid-cols-3 gap-3' %>
+    <%= turbo_frame_tag "options", class:'grid grid-cols-3 gap-3 mt-4' do %>
+      <%= render @options %>
+    <% end %>
+  </div>
+</div>

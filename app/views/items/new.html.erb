@@ -1,0 +1,7 @@
+<h2 class="text-xl">Add a new item for your flat</h2>
+
+<div class="rounded p-2 bg-white text-emerald-950">
+  <%= turbo_frame_tag @item do %>
+    <%= render "form", item: @item %>
+  <% end %>
+</div>

@@ -1,0 +1,31 @@
+<h2 class="text-2xl text-white">
+  <%= @flat.name %>
+</h2>
+<div class="bg-white text-emerald-950 my-2 p-2 rounded">
+  <p class="">
+    <%= @flat.address %>
+  </p>
+  <% @flat.invited_users.each do |user| %>
+    <%= user.email %>
+  <% end %>
+</div>
+
+<div class="bg-white text-emerald-950 my-2 p-4 rounded">
+  <div class="flex justify-between items-center mb-2">
+    <h2 class="text-lg">List of items</h2>
+    <%= link_to "New item",
+                    new_flat_item_path(@flat),
+                    class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
+                    data: { turbo_frame: dom_id(@item) } %>
+  </div>
+
+  <div class="flex flex-col">
+    <%= turbo_frame_tag @item %>
+
+    <%#= turbo_stream_from @items %>
+    <%= turbo_frame_tag "items" do %>
+      <%= render @items %>
+    <% end %>
+  </div>
+  <%# TODO add items and for each item show options and add option btn + add item btn %>
+</div>

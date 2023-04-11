@@ -1,0 +1,13 @@
+<div class="flex justify-between items-center text-white mb-2">
+  <h2 class="text-lg font-bold mr-2">Hello, <%= current_user.email %></h2>
+  <%= link_to "New flat",
+                  new_flat_path,
+                  class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
+                  data: { turbo_frame: dom_id(@flat) } %>
+</div>
+
+<%= turbo_frame_tag @flat %>
+
+<%= turbo_frame_tag "flats" do %>
+  <%= render @flats %>
+<% end %>

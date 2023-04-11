@@ -1,0 +1,5 @@
+<h2 class="text-xl font-bold text-white">Edit option</h2>
+
+<%= turbo_frame_tag @option do %>
+  <%= render "form", option: @option %>
+<% end %>
