@@ -1,12 +1,11 @@
 <div class="bg-white text-emerald-950 my-2 p-2 rounded">
-  <h2 class="text-xl">
-    <%= flat.name %>
-  </h2>
-  <p class="mb-2">
+  <div class="flex justify-between items-center w-full">
+    <h2 class="text-xl"><%= flat.name %></h2>
+    <p class="text-xs">created by <%= flat.user.nickname %></p>
+  </div>
+  <p class="mb-2 text-sm">
     <%= flat.address %>
   </p>
-
-  <%= render flat.invitations %>
 
   <div class="flex justify-end">
     <%= link_to "see more", flat_path(flat), class: "text-white bg-emerald-600 py-1 px-4 rounded ml-2", data: {turbo_frame: '_top'} %>

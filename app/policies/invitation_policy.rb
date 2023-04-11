@@ -9,7 +9,7 @@ class InvitationPolicy < ApplicationPolicy
   end
 
   def new?
-    record.flat.user == user
+    record.flat.user == user || record.flat.invited_users.include?(user)
   end
 
   def create?
