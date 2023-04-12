@@ -1,5 +1,14 @@
 <%= simple_form_for [@flat, invitation], html: { class:'flex items-center justify-between border-solid bg-blue-100 rounded p-4 mb-2' } do |f| %>
-  <%= f.input :email %>
+  <div class="flex w-full items-center">
+    <%= f.input :email, label: false, placeholder: "email of the user", wrapper_html: { class: 'mb-0'}, input_html: { class:'border-none box-shadow-none focus:shadow-none' }  %>
+    <%= f.input :level, as: :radio_buttons,
+            input_html: {class: 'peer hidden'},
+            item_label_class: 'block cursor-pointer select-none rounded-xl px-4 text-center peer-checked:bg-yellow-500 peer-checked:text-white',
+            collection_wrapper_tag: 'div',
+            collection_wrapper_class: 'flex justify-around items-center w-max mx-auto bg-white rounded-xl p-2',
+            legend_tag: false,
+            collection: Invitation.levels.keys %>
+  </div>
   <div class="flex">
     <%= f.submit 'send invitation', class: 'text-white bg-emerald-600 py-1 px-4 rounded' %>
     <%= link_to "cancel", flat_path(@flat), class: "text-white bg-red-800 py-1 px-4 rounded ml-2" %>

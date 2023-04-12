@@ -10,12 +10,15 @@
 
 <div class="bg-white text-emerald-950 my-2 p-4 rounded">
   <div class="flex justify-between items-center mb-2">
-    <h3 class="text-lg">Invited friends</h3>
+    <h3 class="text-lg">Invited users</h3>
 
-    <%= link_to new_flat_invitation_path(@flat), class:'text-xs px-2 rounded text-emerald-100 bg-emerald-500', data: { turbo_frame: dom_id(@invitation) } do %>
-      <i class="fa-solid fa-user-plus"></i>
-      Invite a friend
+    <% if policy(@flat.invitations.new).new? %>
+      <%= link_to new_flat_invitation_path(@flat), class:'text-xs px-2 rounded text-emerald-100 bg-emerald-500', data: { turbo_frame: dom_id(@invitation) } do %>
+        <i class="fa-solid fa-user-plus mr-2"></i>
+        invite
+      <% end %>
     <% end %>
+
   </div>
 
   <%= turbo_frame_tag @invitation %>

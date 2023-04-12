@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   end
 
   def dashboard
-    @flats = policy_scope(Flat)
+    @flats = policy_scope(Flat).uniq
     @flat = current_user.flats.new
   end
 end

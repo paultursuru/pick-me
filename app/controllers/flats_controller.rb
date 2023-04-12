@@ -4,7 +4,8 @@ class FlatsController < ApplicationController
     authorize @flat
     @items = @flat.items.by_importance.ordered
     @item = Item.new
-    @invitations = @flat.invitations
+    @invitations = @flat.invitations.pending_or_accepted
+    @current_user_invitation = @invitations.find_by(user: current_user)
     @invitation = Invitation.new
   end
 
