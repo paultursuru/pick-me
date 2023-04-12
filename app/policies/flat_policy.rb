@@ -17,6 +17,6 @@ class FlatPolicy < ApplicationPolicy
   end
 
   def show?
-    record.user == user || record.invited_users.include?(user)
+    record.user == user || record.invited_accepted_users.include?(user)
   end
 end

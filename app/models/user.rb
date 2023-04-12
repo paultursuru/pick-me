@@ -12,4 +12,16 @@ class User < ApplicationRecord
   has_many :invitations, dependent: :destroy
   has_many :invited_flats, through: :invitations, source: :flat
   has_many :inspirations, dependent: :destroy
+
+  def is_invited_on?(flat)
+    invited_flats.include?(flat)
+  end
+
+  def is_invited_and_pending_on?(flat)
+    invitations.where(flat: flat).first&.pending?
+  end
+
+  def invitation_on(flat)
+    invitations.where(flat: flat).first
+  end
 end

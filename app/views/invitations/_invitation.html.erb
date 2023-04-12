@@ -5,15 +5,8 @@
       <%= invitation.user.nickname %>
     </span>
 
-    <% if invitation.user == current_user %>
-      <% if invitation.pending? %>
-        <%= link_to accept_flat_invitation_path(@flat, invitation), data: {turbo_method: :patch}, class: 'transition-all opacity-50 group-hover:opacity-80 duration-300 text-white bg-emerald-800 flex justify-center items-center h-4 w-4 rounded-full mr-2 text-sm' do %>
-          <%= icon_for_invitation('accept').html_safe %>
-        <% end %>
-      <% end %>
-    <% end %>
-    <% if invitation.user == current_user || @flat.user == current_user %>
-      <%= link_to decline_flat_invitation_path(@flat, invitation), class: "transition-all opacity-50 group-hover:opacity-80 duration-300 text-white bg-red-800 flex justify-center items-center h-4 w-4 rounded-full text-sm", data: { turbo_method: :patch } do %>
+    <% if @flat.user == current_user %>
+      <%= link_to decline_flat_invitation_path(@flat, invitation), class: "transition-all opacity-50 group-hover:opacity-80 duration-300 text-white bg-red-800 flex justify-center items-center h-4 w-4 rounded-full text-sm", data: { turbo_method: :patch, target: "_top" } do %>
         <%= icon_for_invitation('decline').html_safe %>
       <% end %>
     <% end %>

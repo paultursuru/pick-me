@@ -20,7 +20,7 @@ class InvitationsController < ApplicationController
     end
     if @invitation.save
       respond_to do |format|
-        format.html { redirect_to flat_path(@flat) }
+        format.html { redirect_to flat_path(@flat), status: :see_other }
         format.turbo_stream
       end
     else
@@ -44,10 +44,11 @@ class InvitationsController < ApplicationController
     @flat = @invitation.flat
     authorize @invitation
     @invitation.accepted!
-    respond_to do |format|
-      format.html { redirect_to flat_path(@invitation.flat), status: :see_other }
-      format.turbo_stream
-    end
+    # respond_to do |format|
+    #   format.html { redirect_to flat_path(@invitation.flat), status: :see_other }
+    #   format.turbo_stream
+    # end
+    redirect_to flat_path(@invitation.flat), status: :see_other
   end
 
   def decline
@@ -61,7 +62,7 @@ class InvitationsController < ApplicationController
         format.turbo_stream
       end
     else
-      redirect_to dashboard_path, status: :see_other, notice: "You have declined the invitation to join the flat."
+      redirect_to dashboard_path, status: :see_other, target: '_top'
     end
   end
 

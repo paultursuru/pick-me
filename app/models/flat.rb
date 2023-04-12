@@ -16,6 +16,10 @@ class Flat < ApplicationRecord
     invited_users.where(invitations: { level: 1 })
   end
 
+  def invited_accepted_users
+    invited_users.where(invitations: { status: 1 })
+  end
+
   # invited users with their status
   scope :invited_users_with_status_pending, -> { joins(:invitations).where(invitations: { status: 0 }) }
   scope :invited_users_with_status_accepted, -> { joins(:invitations).where(invitations: { status: 1 }) }

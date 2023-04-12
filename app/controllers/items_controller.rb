@@ -26,7 +26,6 @@ class ItemsController < ApplicationController
         format.html { redirect_to flat_path(@flat) }
         format.turbo_stream
       end
-      # redirect_to flat_path(@flat)
     else
       render :new, status: :unprocessable_entity
     end
