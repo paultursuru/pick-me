@@ -44,11 +44,10 @@ class InvitationsController < ApplicationController
     @flat = @invitation.flat
     authorize @invitation
     @invitation.accepted!
-    # respond_to do |format|
-    #   format.html { redirect_to flat_path(@invitation.flat), status: :see_other }
-    #   format.turbo_stream
-    # end
-    redirect_to flat_path(@invitation.flat), status: :see_other
+    respond_to do |format|
+      format.html { redirect_to flat_path(@invitation.flat), status: :see_other }
+      format.turbo_stream
+    end
   end
 
   def decline
@@ -56,14 +55,14 @@ class InvitationsController < ApplicationController
     @flat = @invitation.flat
     authorize @invitation
     @invitation.declined!
-    if @flat.user == current_user
+    # if @flat.user == current_user
+    #   redirect_to dashboard_path, status: :see_other, target: '_top'
+    # else
       respond_to do |format|
         format.html { redirect_to flat_path(@invitation.flat), status: :see_other }
         format.turbo_stream
       end
-    else
-      redirect_to dashboard_path, status: :see_other, target: '_top'
-    end
+    # end
   end
 
   private

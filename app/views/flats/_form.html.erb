@@ -1,13 +1,18 @@
-<%= simple_form_for flat, html: { class:'flex items-center justify-between border-solid bg-blue-100 rounded p-4' } do |f| %>
+<%= simple_form_for flat, html: { class:'md:flex items-center justify-between border-solid bg-blue-100 rounded p-4' } do |f| %>
   <% if flat.errors.any? %>
     <div class="error-message">
       <%= flat.errors.full_messages.to_sentence.capitalize %>
     </div>
   <% end %>
-  <%= f.input :name, label: false, placeholder: "name this flat" %>
-  <%= f.input :address, label: false, placeholder: "12 rue de Strasbourg, Paris 10" %>
-  <div class="flex">
-    <%= f.submit 'save', class: 'text-white bg-emerald-600 py-1 px-4 rounded' %>
-    <%= link_to "cancel", dashboard_path, class: "text-white bg-red-800 py-1 px-4 rounded ml-2" %>
+  <%= f.input :name, label: false, placeholder: "name this place", wrapper_html: { class: 'mb-2 md:mb-0'}, input_html: { class: 'border-none box-shadow-none focus:shadow-none placeholder:text-slate-400 rounded-xl'} %>
+  <%= f.input :address, label: false, placeholder: "12 rue de Strasbourg, Paris 10",  wrapper_html: { class: 'mb-2 md:mb-0'}, input_html: { class: 'border-none box-shadow-none focus:shadow-none placeholder:text-slate-400 rounded-xl'} %>
+  <div class="flex w-full md:w-fit items-center">
+    <%= button_tag type: 'submit', class: 'text-white bg-emerald-600 py-1 px-4 rounded grow text-sm md:text-base flex items-center md:grow-0 justify-center items-center' do %>
+      <i class="fa-solid fa-plus mr-1"></i>
+      add a new place
+    <% end %>
+    <%= link_to dashboard_path, class: "text-white bg-red-800 py-1 px-4 rounded ml-2 text-sm md:text-base" do %>
+      <i class="fas fa-times"></i>
+    <% end %>
   </div>
 <% end %>

@@ -1,1 +1,3 @@
-<%= turbo_stream.replace "invitations", @invitation %>
+<%= turbo_stream.update "invitation-#{@flat.id}" do %>
+  <%= render 'flats/invitation_flat', flat: @flat %>
+<% end %>

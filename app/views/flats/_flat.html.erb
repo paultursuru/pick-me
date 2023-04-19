@@ -1,22 +1,12 @@
 <div class="bg-white text-emerald-950 my-2 p-2 rounded">
   <div class="flex justify-between items-center w-full">
-    <h2 class="text-xl"><%= flat.name %></h2>
+    <h2 class="text-lg md:text-xl"><%= flat.name %></h2>
     <p class="text-xs">created by <%= flat.user.nickname %></p>
   </div>
   <p class="mb-2 text-sm">
     <%= flat.address %>
   </p>
-
-  <div class="flex justify-end items-center">
-
-    <% if current_user.is_invited_on?(flat) %>
-      <% if current_user.invitation_on(flat).pending? %>
-        <span class="text-sm mr-2">you are invited to join this flat</span>
-        <%= link_to "accept", accept_flat_invitation_path(flat, current_user.invitation_on(flat)), class: "text-white bg-emerald-600 py-1 px-4 rounded", data: {turbo_method: :patch, turbo_frame: '_top'} %>
-      <% else %>
-        <%= link_to "see more", flat_path(flat), class: "text-white bg-emerald-600 py-1 px-4 rounded ml-2", data: {turbo_frame: '_top'} %>
-      <% end %>
-      <%= link_to 'decline', decline_flat_invitation_path(flat, current_user.invitation_on(flat)), class: "text-white bg-red-600 py-1 px-4 rounded ml-2", data: {turbo_method: :patch, turbo_frame: '_top'} %>
-    <% end %>
-  </div>
+  <%= turbo_frame_tag "invitation-#{flat.id}" do %>
+    <%= render 'flats/invitation_flat', flat: flat %>
+  <% end %>
 </div>

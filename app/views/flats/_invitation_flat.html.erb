@@ -1,0 +1,21 @@
+<div class="flex justify-end items-center">
+  <% if current_user.is_invited_on?(flat) %>
+    <% if current_user.invitation_on(flat).pending? %>
+      <div class="bg-blue-100 w-full py-1 px-2 rounded flex justify-between items-center">
+        <span class="text-xs md:text-sm mr-2">you are invited to join this flat</span>
+        <div class="flex">
+          <%= link_to accept_flat_invitation_path(flat, current_user.invitation_on(flat)), class: "text-white bg-emerald-600 py-1 px-2 rounded text-sm rounded-lg", data: {turbo_method: :patch, turbo_frame: '_top'} do %>
+            <i class="fas fa-check"></i>
+          <% end %>
+          <%= link_to decline_flat_invitation_path(flat, current_user.invitation_on(flat)), class: "text-white bg-red-600 py-1 px-2 rounded ml-2 text-sm rounded-lg", data: {turbo_method: :patch, turbo_frame: '_top'} do %>
+            <i class="fas fa-times"></i>
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+      <%= link_to "see more", flat_path(flat), class: "text-white bg-emerald-600 py-1 px-2 rounded ml-2 text-sm rounded-lg", data: {turbo_frame: '_top'} %>
+    <% end %>
+  <% elsif flat.user == current_user %>
+    <%= link_to "see more", flat_path(flat), class: "text-white bg-emerald-600 py-1 px-2 rounded ml-2 text-sm rounded-lg", data: {turbo_frame: '_top'} %>
+  <% end %>
+</div>

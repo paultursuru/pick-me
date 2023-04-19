@@ -1,30 +1,28 @@
 <%= turbo_frame_tag item , class:'group' do %>
   <div class="flex justify-between items-center border-b border-solid">
     <%= link_to flat_item_path(@flat, item), class:'flex justify-between items-center w-full p-1 hover:bg-sky-100 transition duration-300 rounded', data: {turbo_frame: '_top'} do %>
-      <div class='flex group-hover:underline'>
+      <div class='flex group-hover:underline text-sm md:text-base font-bold'>
         <%= item.name %>
       </div>
       <div class="text-xs divide-x divide-slate-700">
         <% if item.options.any? %>
-          <% item.options.last(3).each_with_index do |option, index| %>
-            <span class="px-1"><%= option.name %> - <%= option.price %>€ <%= "..." if index == 2 %></span>
-          <% end %>
+          <p><%= item.lowest_highest_prices_with_currency %></p>
         <% else %>
-          <p class="px-1">No options yet, add options <span class="underline">here</span></p>
+          <p class="px-1 underline">no options yet</p>
         <% end %>
       </div>
-      <span class="bg-<%= color_for_importance(item.importance)%>-500 text-white px-4 rounded-xl"><%= item.importance %></span>
+      <span class="bg-<%= color_for_importance(item.importance)%>-500 text-white px-2 rounded-xl text-xs"><%= item.importance %></span>
     <% end %>
 
 
-    <div class="flex w-max">
+    <div class="flex w-max items-center">
       <%= button_to flat_item_path(@flat, item),
                     method: :delete,
-                    class: "px-1 text-red-500" do %>
+                    class: "px-1 text-red-500 text-sm" do %>
                     <i class="fa-solid fa-trash"></i>
       <% end %>
       <%= link_to edit_flat_item_path(@flat, item),
-                  class: "px-1 text-sky-500" do %>
+                  class: "px-1 text-sky-500 text-sm" do %>
                   <i class="fa-solid fa-pen-to-square"></i>
       <% end %>
     </div>

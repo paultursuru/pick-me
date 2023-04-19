@@ -1,40 +1,37 @@
 <%= simple_form_for [@item, option], html: { class:'flex flex-col items-start justify-between border-solid bg-blue-100 rounded p-4 relative h-full' } do |f| %>
-  <div class="flex justify-between items-center w-full mb-2">
-    <% if option.persisted? %>
-      <h2 class="text-sm text-emerald-950">Edit <%= option.name %></h2>
-    <% else %>
-      <h2 class="text-sm text-emerald-950">New option</h2>
-    <% end %>
-    <%= link_to "cancel", flat_item_path(@item.flat, @item), class: "text-white text-xs bg-red-800 px-2 rounded-xl" %>
-
+  <% if option.image.attached? %>
+    <div class="flex flex-col w-full">
+      <%= cl_image_tag option.image.key, width: 320, height: 320, crop: :fit, class: 'rounded w-full object-cover max-h-52' %>
+      <span class="text-xs text-slate-500">replace this image by another one ?</span>
+    </div>
+  <% end %>
+  <div class="flex my-2 items-center relative">
+    <%= f.input :image, as: :file, label: false, input_html: { class: 'block w-full text-sm text-slate-500
+        file:ml-2 file:md:py-2 file:px-4
+        file:rounded-full file:border-0
+        file:text-sm file:font-semibold
+        file:bg-violet-50 file:text-violet-700
+        hover:file:bg-violet-100' } %>
   </div>
-
   <% if option.errors.any? %>
     <div class="error-message">
       <%= option.errors.full_messages.to_sentence.capitalize %>
     </div>
   <% end %>
+
   <%= f.input :name, label: false, placeholder: 'a name for this option..', wrapper_html: { class: 'mb-1 w-full'}, input_html: { class:'border-none box-shadow-none focus:shadow-none' } %>
   <%= f.input :description, label: false, placeholder: 'a short description', wrapper_html: { class: 'mb-1 w-full'}, input_html: { class:'border-none box-shadow-none focus:shadow-none' } %>
   <%= f.input :size, label: false, placeholder: '200 x 100 cm, 3 seats.. or leave empty !', wrapper_html: { class: 'mb-1 w-full'}, input_html: { class:'border-none box-shadow-none focus:shadow-none' } %>
   <%= f.input :price, label: false, placeholder: '200€', wrapper_html: { class: 'mb-1 w-full'}, input_html: { class:'border-none box-shadow-none focus:shadow-none' } %>
   <%= f.input :url, label: false, placeholder: 'https://www.alicelahana-store.com', wrapper_html: { class: 'mb-1 w-full'}, input_html: { class:'border-none box-shadow-none focus:shadow-none' } %>
 
-  <div class="flex my-2 items-center relative">
-    <% if option.image.attached? %>
-      <div class="block">
-        <%= cl_image_tag option.image.key, width: 80, height: 80, crop: :fit, class: 'rounded' %>
-      </div>
-      <span class="text-xs absolute right-0 bottom-0 text-slate-500">replace this image by another one ?</span>
-    <% end %>
-    <%= f.input :image, as: :file, label: false, input_html: { class: 'block w-full text-sm text-slate-500
-        file:ml-2 file:py-2 file:px-4
-        file:rounded-full file:border-0
-        file:text-sm file:font-semibold
-        file:bg-violet-50 file:text-violet-700
-        hover:file:bg-violet-100' } %>
-  </div>
   <div class="flex justify-end w-full mt-2">
-    <%= f.submit "save", class: "text-white bg-emerald-600 py-1 px-4 rounded w-full text-center" %>
+    <%= button_tag type: 'submit', class: "text-white bg-emerald-600 py-1 px-4 rounded w-full text-center grow" do %>
+      <i class="fa-solid fa-floppy-disk mr-1"></i>
+      save
+    <% end %>
+    <%= link_to flat_item_path(@item.flat, @item), class: "text-white bg-red-800 py-1 px-4 rounded ml-2" do %>
+      <i class="fas fa-times"></i>
+    <% end %>
   </div>
 <% end %>

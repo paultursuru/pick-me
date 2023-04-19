@@ -13,8 +13,8 @@
     <h3 class="text-lg">Invited users</h3>
 
     <% if policy(@flat.invitations.new).new? %>
-      <%= link_to new_flat_invitation_path(@flat), class:'text-xs px-2 rounded text-emerald-100 bg-emerald-500', data: { turbo_frame: dom_id(@invitation) } do %>
-        <i class="fa-solid fa-user-plus mr-2"></i>
+      <%= link_to new_flat_invitation_path(@flat), class:'text-xs px-2 py-1 rounded text-emerald-100 bg-emerald-500', data: { turbo_frame: dom_id(@invitation) } do %>
+        <i class="fa-solid fa-user-plus mr-1"></i>
         invite
       <% end %>
     <% end %>
@@ -24,7 +24,9 @@
   <%= turbo_frame_tag @invitation %>
 
   <%= turbo_frame_tag "invitations" do %>
-    <%= render @invitations %>
+    <div class="flex flex-wrap">
+      <%= render @invitations %>
+    </div>
   <% end %>
 </div>
 
@@ -33,10 +35,12 @@
   <div class="bg-white text-emerald-950 my-2 p-4 rounded">
     <div class="flex justify-between items-center mb-2">
       <h2 class="text-lg">List of items</h2>
-      <%= link_to "New item",
-                      new_flat_item_path(@flat),
-                      class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
-                      data: { turbo_frame: dom_id(@item) } %>
+      <%= link_to new_flat_item_path(@flat),
+                  class: "bg-blue-500 hover:bg-blue-700 text-blue-100 px-2 py-1 rounded text-xs",
+                  data: { turbo_frame: dom_id(@item) } do %>
+        <i class="fa-solid fa-plus mr-1"></i>
+        add item
+      <% end %>
     </div>
 
     <div class="flex flex-col">

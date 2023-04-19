@@ -1,1 +1,6 @@
+<%# case when user decline the invitation %>
+<%= turbo_stream.update "invitation-#{@flat.id}" do %>
+  <%= render 'flats/invitation_flat', flat: @flat %>
+<% end %>
+<%# case when user is un-invited/declined by flat creator %>
 <%= turbo_stream.remove @invitation %>
