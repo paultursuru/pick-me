@@ -7,8 +7,8 @@
       <p class="text-xs text-center line-clamp-2"><%= option.size %></p>
     </div>
     <div class="flex md:overflow-hidden items-center transition duration-300 group-hover:w-max absolute top-1 right-1">
-      <%= button_to item_option_path(@item, option),
-                    method: :delete,
+      <%= link_to item_option_path(@item, option),
+                    data: { turbo_method: :delete, turbo_confirm: "you are about to remove this option, are you sure ?"},
                     class: "opacity-100 md:opacity-0 transition duration-300 group-hover:opacity-100 p-0 group-hover:px-1 text-white bg-red-600 h-6 w-6 rounded-full text-xs flex justify-center items-center" do %>
                     <i class="fa-solid fa-trash"></i>
       <% end %>
