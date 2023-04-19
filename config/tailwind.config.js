@@ -9,18 +9,23 @@ module.exports = {
   ],
   safelist: [
     'bg-red-500',
-    'bg-orange-500',
-    'bg-yellow-500',
     'bg-emerald-500',
-    'border-red-500',
-    'border-orange-500',
-    'border-yellow-500',
-    'border-emerald-500'
+    'bg-blue-500',
+    'bg-yellow-500'
   ],
   theme: {
     extend: {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+      },
+      keyframes: {
+        fade_in: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        }
+      },
+      animation: {
+        fade_in: 'fade_in 0.4s ease-in-out',
       },
     },
   },

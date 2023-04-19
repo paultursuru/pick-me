@@ -1,13 +1,23 @@
 <header class="bg-white shadow">
   <div class="container mx-auto px-5 py-3 flex items-center justify-between">
     <div class="flex items-center">
-      <a href="/" class="text-gray-800 text-xl font-bold">Pick Me 👋</a>
+
+      <% if user_signed_in? %>
+        <%= link_to 'Pick Me 👋', dashboard_path, class:'text-gray-800 text-xl font-bold' %>
+      <% else %>
+        <%= link_to 'Pick Me 👋', root_path, class:'text-gray-800 text-xl font-bold' %>
+      <% end %>
     </div>
 
     <div class="flex items-center">
       <% if user_signed_in? %>
         <%= link_to 'dashboard', dashboard_path, class:"text-gray-800 text-sm md:text-lg underline" %>
-        <%= link_to 'sign out', destroy_user_session_path, data: { turbo_method: :delete }, class:"text-red-100 bg-red-800 ml-3 px-2 md:px-4 py-1 rounded-full text-xs md:text-sm" %>
+        <%= link_to destroy_user_session_path,
+                    data: { turbo_method: :delete },
+                    class:"reveal-btn reveal-btn-danger" do %>
+          <i class="fa-solid fa-sign-out"></i>
+          <span class="revealed-text">sign out</span>
+        <% end %>
       <% end %>
     </div>
   </div>

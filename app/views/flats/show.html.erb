@@ -13,9 +13,9 @@
     <h3 class="text-lg">Invited users</h3>
 
     <% if policy(@flat.invitations.new).new? %>
-      <%= link_to new_flat_invitation_path(@flat), class:'text-xs px-2 py-1 rounded text-emerald-100 bg-emerald-500', data: { turbo_frame: dom_id(@invitation) } do %>
-        <i class="fa-solid fa-user-plus mr-1"></i>
-        invite
+      <%= link_to new_flat_invitation_path(@flat), class:'reveal-btn reveal-btn-success', data: { turbo_frame: dom_id(@invitation) } do %>
+        <i class="fa-solid fa-user-plus"></i>
+        <span class="revealed-text">invite someone</span>
       <% end %>
     <% end %>
 
@@ -36,10 +36,10 @@
     <div class="flex justify-between items-center mb-2">
       <h2 class="text-lg">List of items</h2>
       <%= link_to new_flat_item_path(@flat),
-                  class: "bg-blue-500 hover:bg-blue-700 text-blue-100 px-2 py-1 rounded text-xs",
+                  class: "reveal-btn reveal-btn-primary",
                   data: { turbo_frame: dom_id(@item) } do %>
-        <i class="fa-solid fa-plus mr-1"></i>
-        add item
+        <i class="fa-solid fa-plus"></i>
+        <span class="revealed-text">add an item</span>
       <% end %>
     </div>
 

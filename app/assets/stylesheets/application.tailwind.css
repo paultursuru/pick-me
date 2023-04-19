@@ -2,12 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-
 @layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
+  .reveal-btn-danger {
+    @apply text-red-500 border-red-500 bg-red-100;
+  }
+  .reveal-btn-danger:hover {
+    @apply text-red-100 bg-red-500;
+  }
+  .reveal-btn-success {
+    @apply text-emerald-500 border-emerald-500 bg-emerald-100;
+  }
+  .reveal-btn-success:hover {
+    @apply text-emerald-100 bg-emerald-500;
+  }
+  .reveal-btn-primary {
+    @apply text-blue-500 border-blue-500 bg-blue-100;
+  }
+  .reveal-btn-primary:hover {
+    @apply text-blue-100 bg-blue-500;
+  }
+  .reveal-btn {
+    @apply text-xs ml-2 px-2 py-1 rounded-full border transition flex items-center;
+  }
+  .reveal-btn .revealed-text {
+    @apply w-0 h-0 opacity-0 flex overflow-hidden transition-all duration-300;
+  }
+  .reveal-btn:hover .revealed-text {
+    @apply ml-2 w-max h-max opacity-100;
   }
 }
-
-*/

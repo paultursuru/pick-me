@@ -1,10 +1,11 @@
 <div class="flex justify-between items-center text-white mb-2">
   <h2 class="text-lg font-bold mr-2">Hello, <%= current_user.nickname %></h2>
   <%= link_to new_flat_path,
-              class: "bg-blue-500 hover:bg-blue-700 text-white text-xs md:text-sm font-bold py-1 px-3 rounded-lg",
+              class: "reveal-btn reveal-btn-primary",
               data: { turbo_frame: dom_id(@flat) } do %>
       <i class="fas fa-plus mr-1"></i>
       <i class="fa-solid fa-house"></i>
+      <span class="revealed-text">add a house/flat</span>
     <% end %>
 </div>
 

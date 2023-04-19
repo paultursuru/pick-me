@@ -1,4 +1,4 @@
-<%= simple_form_for [@flat, @item], html: { class:'md:flex items-center justify-between border-solid bg-blue-100 rounded p-4' } do |f| %>
+<%= simple_form_for [@flat, @item], html: { class:'md:flex items-center justify-between border-solid bg-blue-100 rounded p-4 animate-fade_in' } do |f| %>
   <% if @item.errors.any? %>
     <div class="error-message">
       <%= @item.errors.full_messages.to_sentence.capitalize %>
@@ -8,18 +8,18 @@
     <%= f.input :name, label: false, placeholder: "couch, table etc...", wrapper_html: { class: 'mb-2 md:mb-0'}, input_html: { class:'border-none rounded-xl box-shadow-none focus:shadow-none placeholder:text-slate-400' }  %>
     <%= f.input :importance, as: :radio_buttons,
             input_html: {class: 'peer hidden'},
-            item_label_class: 'block cursor-pointer select-none rounded-xl px-2 md:px-3 text-center peer-checked:bg-yellow-500 peer-checked:text-white text-xs md:text-base',
+            item_label_class: 'block cursor-pointer select-none rounded-xl px-2 text-center peer-checked:bg-yellow-500 peer-checked:text-white text-xs',
             collection_wrapper_tag: 'div',
             collection_wrapper_class: 'flex w-full md:w-fit justify-around items-center mx-auto bg-white rounded-xl p-2 mb-2 md:mb-0 shadow-md',
             legend_tag: false,
             collection: Item.importances.keys %>
   </div>
   <div class="flex w-full md:w-fit items-center">
-    <%= button_tag type: "submit", class: 'text-white bg-emerald-600 py-1 px-4 rounded grow md:grow-0 flex items-center' do %>
+    <%= button_tag type: "submit", class: 'text-white bg-emerald-500 py-1 px-4 rounded grow md:grow-0 flex items-center justify-center' do %>
       <i class="fa-solid fa-plus mr-1 md:mr-2"></i>
       add
     <% end %>
-    <%= link_to flat_path(@flat), class: "text-white bg-red-800 py-1 px-4 rounded ml-2" do %>
+    <%= link_to flat_path(@flat), class: "text-white bg-red-500 py-1 px-4 rounded ml-2" do %>
       <i class="fas fa-times"></i>
     <% end %>
   </div>

@@ -1,4 +1,4 @@
-<%= simple_form_for [@flat, invitation], html: { class:'md:flex items-center justify-between border-solid bg-blue-100 rounded p-4 mb-2 text-sm' } do |f| %>
+<%= simple_form_for [@flat, invitation], html: { class:'md:flex items-center justify-between border-solid bg-blue-100 rounded p-4 mb-2 text-sm animate-fade_in' } do |f| %>
   <div class="md:flex w-full items-center">
     <%= f.input :email, label: false, placeholder: "john.doe@gmail.com", wrapper_html: { class: 'mb-2 md:mb-0'}, input_html: { class:'border-none box-shadow-none focus:shadow-none rounded-xl placeholder:text-slate-400' }  %>
     <%= f.input :level, as: :radio_buttons,
@@ -10,11 +10,11 @@
             collection: Invitation.levels.keys %>
   </div>
   <div class="flex items-center w-full md:w-fit">
-    <%= button_tag type: "submit", class: 'text-white bg-emerald-600 py-1 px-4 rounded flex items-center grow md:grow-0 md:w-max justify-center' do %>
+    <%= button_tag type: "submit", class: 'text-white bg-emerald-500 py-1 px-4 rounded flex items-center grow md:grow-0 md:w-max justify-center' do %>
       <i class="fa-solid fa-paper-plane mr-2"></i>
       send it !
     <% end %>
-    <%= link_to flat_path(@flat), class: "text-white bg-red-800 py-1 px-4 rounded ml-2" do %>
+    <%= link_to flat_path(@flat), class: "text-white bg-red-500 py-1 px-4 rounded ml-2" do %>
       <i class="fas fa-times"></i>
     <% end %>
   </div>
