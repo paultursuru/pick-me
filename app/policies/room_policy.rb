@@ -21,14 +21,14 @@ class RoomPolicy < ApplicationPolicy
   end
 
   def edit?
-    record.flat.user == user || record.flat.invited_admin_users.include?(user)
+    new?
   end
 
   def update?
-    edit?
+    new?
   end
 
   def destroy?
-    edit?
+    new?
   end
 end
