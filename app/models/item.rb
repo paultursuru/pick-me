@@ -1,6 +1,5 @@
 class Item < ApplicationRecord
   belongs_to :room
-  belongs_to :flat
 
   has_many :options, dependent: :destroy
 
