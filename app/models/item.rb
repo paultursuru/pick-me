@@ -1,5 +1,7 @@
 class Item < ApplicationRecord
   belongs_to :room
+  belongs_to :flat
+
   has_many :options, dependent: :destroy
 
   enum importance: { low: 0, medium: 1, high: 2, urgent: 3 }
