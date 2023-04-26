@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_12_122423) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_25_193348) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -76,10 +76,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_12_122423) do
   create_table "items", force: :cascade do |t|
     t.string "name"
     t.integer "importance", default: 0
-    t.bigint "flat_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["flat_id"], name: "index_items_on_flat_id"
+    t.bigint "room_id", null: false
+    t.index ["room_id"], name: "index_items_on_room_id"
   end
 
   create_table "options", force: :cascade do |t|
@@ -92,6 +92,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_12_122423) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_options_on_item_id"
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
+    t.bigint "flat_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "kind", default: 0, null: false
+    t.index ["flat_id"], name: "index_rooms_on_flat_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -107,6 +116,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_12_122423) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "votes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "option_id", null: false
+    t.integer "stars", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["option_id"], name: "index_votes_on_option_id"
+    t.index ["user_id"], name: "index_votes_on_user_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "flats", "users"
@@ -114,6 +133,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_12_122423) do
   add_foreign_key "inspirations", "users"
   add_foreign_key "invitations", "flats"
   add_foreign_key "invitations", "users"
-  add_foreign_key "items", "flats"
+  add_foreign_key "items", "rooms"
   add_foreign_key "options", "items"
+  add_foreign_key "rooms", "flats"
+  add_foreign_key "votes", "options"
+  add_foreign_key "votes", "users"
 end

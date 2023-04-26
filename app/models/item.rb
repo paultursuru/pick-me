@@ -1,5 +1,5 @@
 class Item < ApplicationRecord
-  belongs_to :flat
+  belongs_to :room
   has_many :options, dependent: :destroy
 
   enum importance: { low: 0, medium: 1, high: 2, urgent: 3 }
@@ -27,5 +27,9 @@ class Item < ApplicationRecord
     else
       ActionController::Base.helpers.number_to_currency(prices.min, unit: '€') + ' - ' + ActionController::Base.helpers.number_to_currency(prices.max, unit: '€')
     end
+  end
+
+  def five_star_options_total_price
+    options.where(rating: 5).map(&:price).sum
   end
 end

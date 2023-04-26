@@ -1,11 +1,44 @@
-<div>
-  <h1 class="font-bold text-4xl text-white">Welcome to <span class="undeline offset-2">Pick Me 👋</span></h1>
-  <div class="flex mt-4">
-    <p class="text-white">
-      <%= link_to 'sign in', new_user_session_path, class:"text-emerald-100 bg-emerald-800 px-4 py-1 rounded-full"  %>
-      or
-      <%= link_to 'sign up', new_user_registration_path, class:"text-white underline offset-2"  %>
-      to start picking items for your flat !
+<div class="text-white">
+  <h1 class="font-bold text-4xl">Welcome to <span class="undeline offset-2">Pick Me 👋</span></h1>
+  <div class="mb-16 mt-8">
+    <p class="text-xl">
+      Planing to move in a new home ?
+    </p>
+    <p class="text-xl">
+      Pick Me is a tool to help you to pick the best items for your new home.
     </p>
   </div>
+  <div class="my-16">
+    <p class="mb-2">
+      Invite your
+      <span class="px-2 py-1 rounded-full w-max bg-green-100 text-green-800 group inline items-center text-sm mr-2 mb-2">
+        <i class='fa-solid fa-circle-user'></i>
+        <span class="ml-1">
+          friends
+        </span>
+      </span>
+      your future
+      <span class="px-2 py-1 rounded-full w-max bg-green-100 text-green-800 group inline items-center text-sm mr-2 mb-2">
+        <i class='fa-solid fa-circle-user'></i>
+        <span class="ml-1">
+          flatmates
+        </span>
+      </span>
+      or your
+      <span class="px-2 py-1 rounded-full w-max bg-yellow-100 text-yellow-800 group inline items-center text-sm mr-2 mb-2">
+        <i class='fa-solid fa-crown'></i>
+        <span class="ml-1">
+          mom
+        </span>
+      </span>
+    </p>
+    <p class="mb-4">
+      to pick the best items together to furnish and decorate your next place.
+  </div>
+  <p class="">
+    <%= link_to 'sign in', new_user_session_path, class:"text-emerald-100 bg-emerald-800 px-4 py-1 rounded-full"  %>
+    or
+    <%= link_to 'sign up', new_user_registration_path, class:"underline offset-2"  %>
+    to start your new project !
+  </p>
 </div>

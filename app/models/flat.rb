@@ -2,7 +2,8 @@ class Flat < ApplicationRecord
   belongs_to :user
   has_many :invitations, dependent: :destroy
   has_many :invited_users, through: :invitations, source: :user
-  has_many :items, dependent: :destroy
+  has_many :rooms, dependent: :destroy
+  has_many :items, through: :rooms
   has_many :options, through: :items
   has_many :inspirations, dependent: :destroy
 

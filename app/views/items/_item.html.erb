@@ -1,6 +1,6 @@
 <%= turbo_frame_tag item , class:'group' do %>
   <div class="flex justify-between items-center border-b border-solid">
-    <%= link_to flat_item_path(@flat, item), class:'grid grid-cols-3 justify-between items-center w-full p-1 hover:bg-sky-100 transition duration-300 rounded', data: {turbo_frame: '_top'} do %>
+    <%= link_to room_item_path(@room, item), class:'grid grid-cols-3 justify-between items-center w-full p-1 hover:bg-sky-100 transition duration-300 rounded', data: {turbo_frame: '_top'} do %>
       <div class='place-self-left flex group-hover:underline text-sm md:text-base font-bold'>
         <%= item.name %>
       </div>
@@ -16,12 +16,12 @@
 
 
     <div class="flex w-max items-center">
-      <%= link_to flat_item_path(@flat, item),
+      <%= link_to room_item_path(@room, item),
                     data: { turbo_method: :delete, turbo_confirm: "you are about to remove this item, are you sure ?"},
                     class: "ml-1 text-red-500 text-sm" do %>
                     <i class="fa-solid fa-trash"></i>
       <% end %>
-      <%= link_to edit_flat_item_path(@flat, item),
+      <%= link_to edit_room_item_path(@room, item),
                   class: "ml-2 text-sky-500 text-sm" do %>
                   <i class="fa-solid fa-pen-to-square"></i>
       <% end %>

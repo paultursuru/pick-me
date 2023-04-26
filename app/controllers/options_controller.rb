@@ -11,7 +11,7 @@ class OptionsController < ApplicationController
     authorize @option
     if @option.save
       respond_to do |format|
-        format.html { redirect_to flat_item_path(@item.flat, @item) }
+        format.html { redirect_to room_item_path(@item.room, @item) }
         format.turbo_stream
       end
     else
@@ -28,7 +28,7 @@ class OptionsController < ApplicationController
     @option = Option.find(params[:id])
     authorize @option
     if @option.update(option_params)
-      redirect_to flat_item_path(@item.flat, @item)
+      redirect_to room_item_path(@item.room, @item)
     else
       render :edit, status: :unprocessable_entity
     end
@@ -39,7 +39,7 @@ class OptionsController < ApplicationController
     authorize @option
     @option.destroy
     respond_to do |format|
-      format.html { redirect_to flat_item_path(@item.flat, @item), status: :see_other }
+      format.html { redirect_to room_item_path(@item.room, @item), status: :see_other }
       format.turbo_stream
     end
   end

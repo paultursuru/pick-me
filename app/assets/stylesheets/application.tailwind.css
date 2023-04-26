@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://ga.jspm.io/npm:star-rating.js@4.3.0/dist/star-rating.css");
 
 @layer components {
   .reveal-btn-danger {

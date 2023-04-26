@@ -1,0 +1,4 @@
+<%#= turbo_stream.prepend "items", @item %>
+<%#= turbo_stream.update @flat.items.new, "" %>
+<%# replace vote on the option using turbo stream %>
+<%#= turbo_stream.replace @vote, partial: "votes/vote", locals: { vote: @vote } %>

@@ -1,0 +1,6 @@
+<%= simple_form_for([option, vote], data: {controller: "form-submit"}) do |f| %>
+  <div data-action="click->form-submit#submit" class="mb-2">
+    <%= f.input :stars, collection: (1..5).to_a, label_html: {class: 'hidden'}, required: false, input_html: {data: { controller: "star-rating"}}  %>
+  </div>
+  <%= f.submit class: "hidden" %>
+<% end %>

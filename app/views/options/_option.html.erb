@@ -1,11 +1,13 @@
 <%= turbo_frame_tag option , class:'group' do %>
-  <div class="flex flex-col justify-start items-center border relative mt-4 md:mt-0 h-72 rounded overflow-hidden">
-    <%= cl_image_tag option.image.key, width: 320, height: 320, crop: :fit, class: 'w-full object-cover h-52 max-h-52' if option.image.attached? %>
-    <div class='flex flex-col justify-center items-center px-3 pb-3'>
-      <h3 class=""><span class="text-lg font-bold"><%= option.name %></span> - <%= option.price_with_currency %></h3>
-      <p class="text-xs text-center line-clamp-2"><%= option.description %></p>
-      <p class="text-xs text-center line-clamp-2"><%= option.size %></p>
-    </div>
+  <div class="flex flex-col justify-start items-center border relative mt-4 md:mt-0 h-72 h-max rounded">
+    <%= link_to option.url, target: '_blank' do %>
+      <%= cl_image_tag option.image.key, width: 320, height: 320, crop: :fit, class: 'w-full object-cover h-52 max-h-52' if option.image.attached? %>
+      <div class='flex flex-col justify-center items-center px-3 pb-3'>
+        <h3 class="text-center"><span class="text-lg font-bold"><%= option.name %></span> - <%= option.price_with_currency %></h3>
+        <p class="text-xs text-center line-clamp-2"><%= option.description %></p>
+        <p class="text-xs text-center line-clamp-2"><%= option.size %></p>
+      </div>
+    <% end %>
     <div class="flex md:overflow-hidden items-center transition duration-300 group-hover:w-max absolute top-1 right-1">
       <%= link_to item_option_path(@item, option),
                     data: { turbo_method: :delete, turbo_confirm: "you are about to remove this option, are you sure ?"},
@@ -17,5 +19,25 @@
                   <i class="fa-solid fa-pen-to-square"></i>
       <% end %>
     </div>
+
+    <% if option.vote_by(current_user) %>
+      <div class="absolute top-0 flex justify-between items-center w-full">
+        <div class="avg-stars flex">
+          <span class="text-xs"></span>
+          <%= stars_for_option_in_icons(option.average_stars) %>
+        </div>
+        <div class="user-stars flex">
+          <span class="text-xs"></span>
+          <%#= stars_for_option_in_icons(option.stars_by(current_user)) %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if option.vote_by(current_user) %>
+      <%= render 'votes/form', option: option, vote: option.vote_by(current_user) %>
+    <% else %>
+      <%= render 'votes/form', option: option, vote: option.votes.new %>
+    <% end %>
+
   </div>
 <% end %>

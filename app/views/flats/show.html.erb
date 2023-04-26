@@ -33,21 +33,16 @@
 
 <% if (@current_user_invitation && @current_user_invitation&.accepted?) || @flat.user == current_user %>
   <div class="bg-white text-emerald-950 my-2 p-4 rounded">
-    <div class="flex justify-between items-center mb-2">
-      <h2 class="text-lg">List of items</h2>
-      <%= link_to new_flat_item_path(@flat),
-                  class: "reveal-btn reveal-btn-primary",
-                  data: { turbo_frame: dom_id(@item) } do %>
-        <i class="fa-solid fa-plus"></i>
-        <span class="revealed-text">add an item</span>
+    <div class="block md:flex justify-between items-center mb-2">
+      <h3 class="text-lg">List of rooms</h3>
+      <%= turbo_frame_tag @room do %>
+        <%= render "rooms/form", room: @room %>
       <% end %>
     </div>
 
     <div class="flex flex-col">
-      <%= turbo_frame_tag @item %>
-
-      <%= turbo_frame_tag "items" do %>
-        <%= render @items %>
+      <%= turbo_frame_tag "rooms", class:'md:grid md:grid-cols-3 gap-3 mt-4 md:grid-flow-dense' do %>
+        <%= render @rooms %>
       <% end %>
     </div>
   </div>

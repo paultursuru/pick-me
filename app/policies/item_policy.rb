@@ -9,7 +9,7 @@ class ItemPolicy < ApplicationPolicy
   end
 
   def show?
-    record.flat.user == user || record.flat.invited_users.include?(user)
+    record.room.flat.user == user || record.room.flat.invited_users.include?(user)
   end
 
   def new?

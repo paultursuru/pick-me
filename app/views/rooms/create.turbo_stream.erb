@@ -1,0 +1,4 @@
+<%= turbo_stream.prepend "rooms", @room %>
+<%= turbo_stream.update @flat.rooms.new do %>
+  <%= render "form", room: @flat.rooms.new %>
+<% end %>

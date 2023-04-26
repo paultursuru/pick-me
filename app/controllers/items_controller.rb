@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_flat, only: [:show, :new, :create, :edit, :update, :destroy]
+  before_action :set_room, only: [:show, :new, :create, :edit, :update, :destroy]
 
   # def index
   #   @items = Item.all
@@ -7,23 +7,24 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    @options = @item.options
+    @options = @item.options.sort_by(&:average_stars).reverse
     @option = Option.new
+    @vote = Vote.new
     authorize @item
   end
 
   def new
-    @item = @flat.items.new
+    @item = @room.items.new
     authorize @item
   end
 
   def create
-    @item = @flat.items.new(item_params)
+    @item = @room.items.new(item_params)
     authorize @item
-    @item.flat = @flat
+    @item.room = @room
     if @item.save
       respond_to do |format|
-        format.html { redirect_to flat_path(@flat) }
+        format.html { redirect_to flat_room_path(@room.flat, @room) }
         format.turbo_stream
       end
     else
@@ -32,26 +33,26 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = @flat.items.find(params[:id])
+    @item = @room.items.find(params[:id])
     authorize @item
   end
 
   def update
-    @item = @flat.items.find(params[:id])
+    @item = @room.items.find(params[:id])
     authorize @item
     if @item.update(item_params)
-      redirect_to flat_path(@flat)
+      redirect_to flat_room_path(@room.flat, @room)
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @item = @flat.items.find(params[:id])
+    @item = @room.items.find(params[:id])
     authorize @item
     @item.destroy
     respond_to do |format|
-      format.html { redirect_to flat_path(@flat), status: :see_other }
+      format.html { redirect_to flat_room_path(@room.flat, @room), status: :see_other }
       format.turbo_stream
     end
   end
@@ -62,7 +63,7 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:name, :importance)
   end
 
-  def set_flat
-    @flat = Flat.find(params[:flat_id])
+  def set_room
+    @room = Room.find(params[:room_id])
   end
 end

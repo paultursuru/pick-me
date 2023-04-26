@@ -9,9 +9,17 @@ Rails.application.routes.draw do
         patch :decline
       end
     end
+    resources :rooms, only: [:show, :new, :create, :edit, :update]
+  end
+
+  # avoiding double nesting
+  resources :rooms, only: [:destroy] do
     resources :items, only: [:show, :new, :create, :edit, :update, :destroy]
   end
   resources :items, only: [] do
     resources :options, only: [:new, :create, :edit, :update, :destroy]
+  end
+  resources :options, only: [] do
+    resources :votes, only: [:create, :update]
   end
 end

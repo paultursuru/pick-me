@@ -13,7 +13,7 @@ class OptionPolicy < ApplicationPolicy
   # end
 
   def new?
-    record.item.flat.user == user || record.item.flat.invited_users.include?(user)
+    record.item.room.flat.user == user || record.item.room.flat.invited_users.include?(user)
   end
 
   def create?
