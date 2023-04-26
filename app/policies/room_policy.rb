@@ -21,7 +21,7 @@ class RoomPolicy < ApplicationPolicy
   end
 
   def edit?
-    record.flat.user == user
+    record.flat.user == user || record.flat.invited_admin_users.include?(user)
   end
 
   def update?

@@ -20,8 +20,12 @@
         </div>
       </div>
     <% end %>
-    <%= link_to room_path(room), data: {turbo_method: :delete}, class: 'absolute top-1 right-2 text-blue-300' do %>
-      <i class="fa-solid fa-times"></i>
+
+    <% if policy(room).destroy? %>
+      <%= link_to room_path(room), data: {turbo_method: :delete}, class: 'absolute top-1 right-2 text-blue-300' do %>
+        <i class="fa-solid fa-times"></i>
+      <% end %>
     <% end %>
+
   </div>
 <% end %>
