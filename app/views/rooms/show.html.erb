@@ -5,13 +5,23 @@
 
 <div class="bg-white text-emerald-950 my-2 p-4 rounded">
   <div class="flex justify-between items-center mb-2">
-    <h2 class="text-lg">List of items for <%= @room.name %></h2>
-    <%= link_to new_room_item_path(@room),
-                class: "reveal-btn reveal-btn-primary",
-                data: { turbo_frame: dom_id(@item) } do %>
-      <i class="fa-solid fa-plus"></i>
-      <span class="revealed-text">add an item</span>
+    <%= turbo_frame_tag @room do %>
+      <h2 class="text-lg">List of items for <%= @room.name %></h2>
     <% end %>
+      <div class="flex">
+        <%= link_to edit_flat_room_path(@flat, @room),
+          class: "reveal-btn reveal-btn-success",
+          data: { turbo_frame: dom_id(@room)} do %>
+          <i class="fa-solid fa-pencil"></i>
+          <span class="revealed-text">edit this room</span>
+        <% end %>
+        <%= link_to new_room_item_path(@room),
+                    class: "reveal-btn reveal-btn-primary",
+                    data: { turbo_frame: dom_id(@item) } do %>
+          <i class="fa-solid fa-plus"></i>
+          <span class="revealed-text">add an item</span>
+        <% end %>
+      </div>
   </div>
   <p class="text-sm text-slate-500">Here you can see all the items you need for this room.</p>
   <p class="text-sm text-slate-500">Add has many items as you want using the form up there to the right.</p>

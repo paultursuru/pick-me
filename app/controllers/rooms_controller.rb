@@ -28,6 +28,24 @@ class RoomsController < ApplicationController
     end
   end
 
+  def edit
+    @room = Room.find(params[:id])
+    authorize @room
+  end
+
+  def update
+    @room = Room.find(params[:id])
+    authorize @room
+    if @room.update(room_params)
+      respond_to do |format|
+        format.html { redirect_to flat_path(@flat) }
+        format.turbo_stream
+      end
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     @room = Room.find(params[:id])
     authorize @room
