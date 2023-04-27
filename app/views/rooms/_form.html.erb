@@ -1,5 +1,5 @@
 <%= simple_form_for [@flat, room], data: {controller: "form-submit"}, html: { class:'md:flex items-center justify-between animate-fade_in' } do |f| %>
-  <div class="flex items-center justify-start <%= 'bg-blue-100 p-2 rounded' if room.persisted? %>">
+  <div class="md:flex items-center justify-start <%= 'bg-blue-100 p-2 rounded' if room.persisted? %>">
     <% if room.persisted? %>
       <%= f.input :name, label: false, wrapper_html: { class: 'mb-1 w-1-3'}, input_html: { class:'border-none box-shadow-none focus:shadow-none' } %>
       <%= f.input :kind,
