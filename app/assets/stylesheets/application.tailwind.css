@@ -1,7 +1,7 @@
+@import url("https://ga.jspm.io/npm:star-rating.js@4.3.0/dist/star-rating.css");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url("https://ga.jspm.io/npm:star-rating.js@4.3.0/dist/star-rating.css");
 
 @layer components {
   .reveal-btn-danger {
@@ -29,6 +29,12 @@
     @apply w-0 h-0 opacity-0 flex overflow-hidden transition-all duration-300;
   }
   .reveal-btn:hover .revealed-text {
-    @apply ml-2 w-max h-max opacity-100;
+    @apply mx-2 w-max h-max opacity-100;
+  }
+  .reveal-btn-avatar {
+    @apply drop-shadow-lg bg-white text-slate-700 border-white border;
+  }
+  .reveal-btn-avatar:hover {
+    @apply drop-shadow-xl;
   }
 }

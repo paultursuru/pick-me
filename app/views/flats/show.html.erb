@@ -4,30 +4,31 @@
 <% end %>
 
 <div class="my-2">
-  <h2 class="text-2xl text-white"><%= @flat.name %></h2>
-  <p class="text-white"><%= @flat.address %></p>
 </div>
 
 <div class="bg-white text-emerald-950 my-2 p-4 rounded">
   <div class="flex justify-between items-center mb-2">
-    <h3 class="text-lg">Invited users</h3>
-
-    <% if policy(@flat.invitations.new).new? %>
-      <%= link_to new_flat_invitation_path(@flat), class:'reveal-btn reveal-btn-success', data: { turbo_frame: dom_id(@invitation) } do %>
-        <i class="fa-solid fa-user-plus"></i>
-        <span class="revealed-text">invite someone</span>
+    <div>
+      <h2 class="text-2xl"><%= @flat.name %></h2>
+      <p class=""><%= @flat.address %></p>
+    </div>
+    <div class="flex justify-end items-center">
+      <% if policy(@flat.invitations.new).new? %>
+        <%= link_to new_flat_invitation_path(@flat), class:'reveal-btn reveal-btn-success w-max text-sm mr-2 mb-2', data: { turbo_frame: dom_id(@invitation) } do %>
+          <i class="fa-solid fa-user-plus"></i>
+          <span class="revealed-text">invite someone</span>
+        <% end %>
       <% end %>
-    <% end %>
+      <%= turbo_frame_tag @invitation %>
+
+      <%= turbo_frame_tag "invitations" do %>
+        <div class="flex flex-wrap items-center">
+          <%= render @invitations %>
+        </div>
+      <% end %>
+    </div>
 
   </div>
-
-  <%= turbo_frame_tag @invitation %>
-
-  <%= turbo_frame_tag "invitations" do %>
-    <div class="flex flex-wrap">
-      <%= render @invitations %>
-    </div>
-  <% end %>
 </div>
 
 

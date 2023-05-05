@@ -13,6 +13,8 @@ class User < ApplicationRecord
   has_many :invited_flats, through: :invitations, source: :flat
   has_many :inspirations, dependent: :destroy
 
+  has_one_attached :avatar
+
   def is_invited_on?(flat)
     invited_flats.include?(flat)
   end

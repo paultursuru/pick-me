@@ -1,14 +1,26 @@
 <%= turbo_frame_tag invitation do %>
-  <p class="px-2 rounded-full w-max <%= color_for_invitation(invitation.status)%> group flex items-center text-sm mr-2 mb-2">
-    <%= icon_for_invitation(invitation.level).html_safe %>
-    <span class="mx-2">
-      <%= invitation.user.nickname %>
-    </span>
-
-    <% if invitation.flat.user == current_user %>
-      <%= link_to decline_flat_invitation_path(invitation.flat, invitation), class: "transition-all opacity-50 group-hover:opacity-80 duration-300 text-white bg-red-800 flex justify-center items-center h-4 w-4 rounded-full text-sm", data: { turbo_method: :patch, target: "_top" } do %>
-        <%= icon_for_invitation('decline').html_safe %>
+  <p class="rounded-full <%= color_for_invitation(invitation.status)%> group flex items-center justify-between text-sm mr-2 mb-2 reveal-btn reveal-btn-avatar min-w-5 min-h-5">
+    <% if invitation.level %>
+      <%= icon_for_invitation(invitation.level).html_safe %>
+      <% if invitation.user.avatar.attached? %>
+        <%= cl_image_tag invitation.user.avatar.key, alt: "#{invitation.user.nickname}'s avatar", width: 30, height: 30, class:'rounded-full' %>
+      <% end %>
+    <% else %>
+      <% if invitation.user.avatar.attached? %>
+        <%= cl_image_tag invitation.user.avatar.key, alt: "#{invitation.user.nickname}'s avatar", width: 30, height: 30, class:'rounded-full' %>
+      <% else %>
+        <%= icon_for_invitation(invitation.level).html_safe %>
       <% end %>
     <% end %>
+
+    <span class="revealed-text">
+      <%= invitation.user.nickname %>
+      <% if invitation.flat.user == current_user %>
+        <%= link_to decline_flat_invitation_path(invitation.flat, invitation), class: "transition-all opacity-50 ml-2 group-hover:opacity-80 duration-300 text-white bg-red-800 flex justify-center items-center h-4 w-4 rounded-full text-sm", data: { turbo_method: :patch, target: "_top" } do %>
+          <%= icon_for_invitation('decline').html_safe %>
+        <% end %>
+      <% end %>
+    </span>
+
   </p>
 <% end %>
