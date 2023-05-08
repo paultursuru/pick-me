@@ -25,7 +25,7 @@
       </div>
         <div class="text-xs reveal-btn reveal-btn-avatar <%= 'p-0' if flat.user.avatar.attached? %>">
           <% if flat.user.avatar.attached? %>
-            <%= cl_image_tag flat.user.avatar.key, alt: "#{flat.user.nickname}'s avatar", width: 40, height: 40, class: 'rounded-full' %>
+            <%= cl_image_tag flat.user.avatar.key, alt: "#{flat.user.nickname}'s avatar", width: 40, height: 40, crop: "fill", class: 'rounded-full w-10 h-10' %>
           <% else %>
             <%= icon_for_invitation("admin") %>
           <% end %>
