@@ -20,8 +20,4 @@ class Room < ApplicationRecord
 
     items.map(&:options_average_price).sum
   end
-
-  def room_average_price_with_currency
-    ActionController::Base.helpers.number_to_currency(room_average_price, unit: '€')
-  end
 end

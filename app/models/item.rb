@@ -11,18 +11,11 @@ class Item < ApplicationRecord
 
   scope :by_importance, -> { order(importance: :desc) }
   scope :ordered, -> { order(created_at: :desc) }
-  scope :sort_by_avg_price, -> { sort_by {|item| item.options_average_price} }
 
   def options_average_price
     return 0 if options.nil?
 
     options.map(&:price).sum.to_f / options.count
-  end
-
-  def options_average_price_with_currency
-    return 0 unless options_average_price
-
-    ActionController::Base.helpers.number_to_currency(options_average_price, unit: '€')
   end
 
   def lowest_highest_prices_with_currency

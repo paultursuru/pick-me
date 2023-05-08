@@ -18,16 +18,6 @@ class Flat < ApplicationRecord
     rooms.map(&:room_average_price).sum
   end
 
-  def estimated_total_cost_for_all_rooms_with_currency
-    ActionController::Base.helpers.number_to_currency(estimated_total_cost_for_all_rooms, unit: '€')
-  end
-
-  def budget_with_currency
-    return 0 if budget.nil?
-
-    ActionController::Base.helpers.number_to_currency(budget, unit: '€')
-  end
-
   def budget_left
     return 0 if budget.nil?
 
@@ -37,7 +27,7 @@ class Flat < ApplicationRecord
   def priciest_item
     return nil if items.empty?
 
-    items.sort_by_avg_price.first
+    options.sort_by_price.first
   end
 
   # invited users with their level
