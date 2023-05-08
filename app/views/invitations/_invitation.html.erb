@@ -3,11 +3,11 @@
     <% if invitation.level %>
       <%= icon_for_invitation(invitation.level).html_safe %>
       <% if invitation.user.avatar.attached? %>
-        <%= cl_image_tag invitation.user.avatar.key, alt: "#{invitation.user.nickname}'s avatar", width: 30, height: 30, crop: 'fill', class:'rounded-full w-7 h-7' %>
+        <%= cl_image_tag invitation.user.avatar.key, alt: "#{invitation.user.nickname}'s avatar", width: 30, height: 30, crop: 'fill', class:'rounded-full w-5 h-5' %>
       <% end %>
     <% else %>
       <% if invitation.user.avatar.attached? %>
-        <%= cl_image_tag invitation.user.avatar.key, alt: "#{invitation.user.nickname}'s avatar", width: 30, height: 30, crop: 'fill', class:'rounded-full w-7 h-7' %>
+        <%= cl_image_tag invitation.user.avatar.key, alt: "#{invitation.user.nickname}'s avatar", width: 30, height: 30, crop: 'fill', class:'rounded-full w-5 h-5' %>
       <% else %>
         <%= icon_for_invitation(invitation.level).html_safe %>
       <% end %>
