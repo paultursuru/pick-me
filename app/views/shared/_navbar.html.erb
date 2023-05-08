@@ -15,7 +15,7 @@
         <% if current_user.avatar.attached? %>
           <%= link_to edit_user_registration_path,
                     class:"reveal-btn reveal-btn-avatar flex items-center shadow-lg p-0" do %>
-            <%= cl_image_tag current_user.avatar.key, alt: 'avatar picture', width: 20, height: 20, crop: 'fill', class: "w-5 h-5 rounded-full" %>
+            <%= cl_image_tag current_user.avatar.key, alt: "#{current_user.nickname}'s avatar", width: 20, height: 20, crop: 'fill', class: "w-5 h-5 rounded-full" %>
             <span class="revealed-text">profile</span>
           <% end %>
         <% else %>
