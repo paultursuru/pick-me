@@ -15,12 +15,13 @@ class Room < ApplicationRecord
     update(name: "#{kind.gsub("_", " ")}#{ room_number }") if name.nil?
   end
 
-  def estimated_total_cost
+  def room_average_price
     return 0 if options.empty?
-    options.map(&:price).sum
+
+    items.map(&:options_average_price).sum
   end
 
-  def estimated_total_cost_with_currency
-    ActionController::Base.helpers.number_to_currency(estimated_total_cost, unit: '€')
+  def room_average_price_with_currency
+    ActionController::Base.helpers.number_to_currency(room_average_price, unit: '€')
   end
 end

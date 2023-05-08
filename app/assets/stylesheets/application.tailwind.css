@@ -26,7 +26,10 @@
     @apply text-xs ml-2 px-2 py-1 rounded-full border transition flex items-center;
   }
   .reveal-btn .revealed-text {
-    @apply w-0 h-0 opacity-0 flex overflow-hidden transition-all duration-300;
+    @apply w-0 h-0 opacity-0 flex items-center overflow-hidden transition-all duration-300;
+  }
+  .reveal-btn-small {
+    @apply w-5 h-5 min-w-min text-xxs p-0.5 justify-center;
   }
   .reveal-btn:hover .revealed-text {
     @apply mx-2 w-max h-max opacity-100;

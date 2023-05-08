@@ -1,16 +1,27 @@
-<%= simple_form_for flat, html: { class:'md:flex items-center justify-between border-solid bg-blue-100 rounded p-4 animate-fade_in' } do |f| %>
+<%= simple_form_for flat, html: { class:'md:flex items-end justify-between border-solid bg-blue-100 rounded p-4 animate-fade_in' } do |f| %>
   <% if flat.errors.any? %>
     <div class="error-message">
       <%= flat.errors.full_messages.to_sentence.capitalize %>
     </div>
   <% end %>
-  <%= f.input :name, label: false, placeholder: "name this place", wrapper_html: { class: 'mb-2 md:mb-0 md:mr-2'}, input_html: { class: 'border-none box-shadow-none focus:shadow-none placeholder:text-slate-400 rounded-xl'} %>
-  <%= f.input :address, label: false, placeholder: "12 rue de Strasbourg, Paris 10",  wrapper_html: { class: 'mb-2 md:mb-0 md:mr-2'}, input_html: { class: 'border-none box-shadow-none focus:shadow-none placeholder:text-slate-400 rounded-xl'} %>
+  <div>
+    <span class="text-xs text-slate-700">a name for this project</span>
+    <%= f.input :name, label: false, placeholder: "name this place", wrapper_html: { class: 'mb-2 md:mb-0 md:mr-2'}, input_html: { class: 'border-none box-shadow-none focus:shadow-none placeholder:text-slate-400 rounded-xl'} %>
+  </div>
+  <div>
+    <span class="text-xs text-slate-700">where is it located ?</span>
+    <%= f.input :address, label: false, placeholder: "12 rue de Strasbourg, Paris 10",  wrapper_html: { class: 'mb-2 md:mb-0 md:mr-2'}, input_html: { class: 'border-none box-shadow-none focus:shadow-none placeholder:text-slate-400 rounded-xl'} %>
+  </div>
+  <div>
+    <span class="text-xs text-slate-700">how much could you spend ?</span>
+    <%= f.input :budget, label: false, placeholder: "1000",  wrapper_html: { class: 'mb-2 md:mb-0 md:mr-2'}, input_html: { class: 'border-none box-shadow-none focus:shadow-none placeholder:text-slate-400 rounded-xl'} %>
+  </div>
   <div class="flex w-full md:w-fit items-center">
-    <%= button_tag type: 'submit', class: 'text-white bg-emerald-500 py-1 px-4 rounded grow text-sm md:text-base flex items-center md:grow-0 justify-center items-center' do %>
+    <%= button_tag type: 'submit', class: 'text-white bg-emerald-500 py-1 px-4 rounded grow text-sm md:text-base flex items-center md:grow-0 justify-center items-center mb-1' do %>
       <i class="fa-solid fa-floppy-disk mr-1"></i>
       save
     <% end %>
+
     <%= link_to dashboard_path, class: "text-white bg-red-500 py-1 px-4 rounded ml-2 text-sm md:text-base" do %>
       <i class="fas fa-times"></i>
     <% end %>

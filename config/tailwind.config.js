@@ -24,6 +24,12 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
+      fontSize: {
+        'xxs': '10px',
+      },
+      padding: {
+        'xxxs': '4px'
+      },
       keyframes: {
         fade_in: {
           '0%': { opacity: '0' },

@@ -1,4 +1,5 @@
-<div>
-  <h1 class="font-bold text-4xl">Flats#edit</h1>
-  <p>Find me in app/views/flats/edit.html.erb</p>
-</div>
+<h2 class="text-xl font-bold">New Flat</h2>
+
+<%= turbo_frame_tag @flat do %>
+  <%= render "form", flat: @flat %>
+<% end %>

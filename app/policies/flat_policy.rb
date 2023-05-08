@@ -16,7 +16,19 @@ class FlatPolicy < ApplicationPolicy
     new?
   end
 
+  def edit?
+    record.user == user
+  end
+
+  def update?
+    edit?
+  end
+
   def show?
     record.user == user || record.invited_accepted_users.include?(user)
+  end
+
+  def destroy?
+    edit?
   end
 end

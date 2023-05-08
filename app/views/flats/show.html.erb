@@ -6,7 +6,7 @@
 <div class="my-2">
 </div>
 
-<div class="bg-white text-emerald-950 my-2 p-4 rounded">
+<div class="bg-gray-50 text-emerald-950 my-2 p-4 rounded">
   <div class="flex justify-between items-center mb-2">
     <div>
       <h2 class="text-2xl"><%= @flat.name %></h2>
@@ -27,15 +27,36 @@
         </div>
       <% end %>
     </div>
-
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+    <div class="flex flex-col justify-evenly items-center p-2 h-36 shadow-lg bg-white rounded-lg text-green-950">
+      <h3 class="text-xl">Budget</h3>
+      <div class="flex flex-col items-center">
+        <span class="text-xs">estimated spendings</span>
+        <p class="pb-2"><%= number_to_euros(@flat.estimated_total_cost_for_all_rooms) %></p>
+        <span class="text-xs">budget left</span>
+        <p class="text-xs"><%= number_to_euros(@flat.budget_left) %> / <%= number_to_euros(@flat.budget) %></p>
+      </div>
+    </div>
+    <div class="flex flex-col justify-evenly items-center p-2 h-36 shadow-lg bg-white rounded-lg text-green-950">
+      <h3 class="text-xl">Items</h3>
+      <div class="flex flex-col items-center">
+        <p class="text-base pb-2"><%= pluralize(@flat.items.count, 'item') %></p>
+        <span class="text-xs">priciest item</span>
+        <p class="text-sm"><%= @flat.priciest_item.name %> - <%= number_to_euros(@flat.priciest_item.options_average_price) %></p>
+      </div>
+    </div>
+    <div class="flex flex-col justify-evenly items-center p-2 h-36 shadow-lg bg-white rounded-lg text-green-950">
+      <h3 class="text-xl">Options</h3>
+    </div>
   </div>
 </div>
 
 
 <% if (@current_user_invitation && @current_user_invitation&.accepted?) || @flat.user == current_user %>
-  <div class="bg-white text-emerald-950 my-2 p-4 rounded">
-    <div class="block md:flex justify-between items-center mb-2">
-      <h3 class="text-lg">List of rooms</h3>
+  <div class="bg-blue-50 text-emerald-950 my-2 p-4 rounded">
+    <div class="block justify-between items-center mb-2">
+      <h3 class="text-lg mb-2">Rooms</h3>
       <%= turbo_frame_tag @room do %>
         <%= render "rooms/form", room: @room %>
       <% end %>

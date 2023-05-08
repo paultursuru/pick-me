@@ -1,4 +1,6 @@
 class FlatsController < ApplicationController
+  before_action :set_flat, only: [:edit, :update, :destroy]
+
   def show
     @flat = Flat.find(params[:id])
     authorize @flat
@@ -21,7 +23,7 @@ class FlatsController < ApplicationController
     authorize @flat
     if @flat.save
       respond_to do |format|
-        format.html { flat_path(@flat) }
+        format.html { redirect_to flat_path(@flat) }
         format.turbo_stream
       end
     else
@@ -33,11 +35,17 @@ class FlatsController < ApplicationController
   end
 
   def update
+    if @flat.update(flat_params)
+      respond_to do |format|
+        format.html { redirect_to dashboard_path }
+        format.turbo_stream
+      end
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
-    @flat = Flat.find(params[:id])
-    authorize @flat
     @flat.destroy
     respond_to do |format|
       format.html { redirect_to dashboard_path, status: :see_other }
@@ -47,7 +55,11 @@ class FlatsController < ApplicationController
 
   private
 
+  def set_flat
+    @flat = Flat.find(params[:id])
+    authorize @flat
+  end
   def flat_params
-    params.require(:flat).permit(:name, :address, :photo)
+    params.require(:flat).permit(:name, :address, :budget, :photo)
   end
 end

@@ -1,19 +1,41 @@
-<div class="bg-white text-emerald-950 my-2 p-4 rounded">
-  <div class="flex justify-between items-center w-full">
-    <h2 class="text-lg md:text-xl"><%= flat.name %></h2>
-    <div class="text-xs reveal-btn reveal-btn-avatar <%= 'p-0' if flat.user.avatar.attached? %>">
-      <% if flat.user.avatar.attached? %>
-        <%= cl_image_tag flat.user.avatar.key, alt: "#{flat.user.nickname}'s avatar", width: 40, height: 40, class: 'rounded-full' %>
-      <% else %>
-        <%= icon_for_invitation("admin") %>
+<%= turbo_frame_tag flat do %>
+  <div class="bg-white text-emerald-950 my-2 p-4 rounded">
+    <div class="flex justify-between items-center w-full">
+      <div>
+        <div class="flex">
+          <h2 class="text-lg md:text-xl"><%= flat.name %></h2>
+          <% if policy(flat).edit? %>
+            <%= link_to edit_flat_path(flat),
+                        class: "reveal-btn reveal-btn-success reveal-btn-small",
+                        data: { turbo_frame: dom_id(flat)} do %>
+                        <i class="fa-solid fa-pencil"></i>
+                        <span class="revealed-text">edit</span>
+            <% end %>
+            <%= link_to flat_path(flat),
+                        class: "reveal-btn reveal-btn-danger reveal-btn-small",
+                        data: { turbo_method: "delete", turbo_confirm: "If you remove this project, you'll also remove all it's rooms, items and options. Are you sure ?"} do %>
+                        <i class="fa-solid fa-times"></i>
+                        <span class="revealed-text">remove</span>
+            <% end %>
+          <% end %>
+        </div>
+        <p class="mb-2 text-sm">
+          <%= flat.address %>
+        </p>
+      </div>
+        <div class="text-xs reveal-btn reveal-btn-avatar <%= 'p-0' if flat.user.avatar.attached? %>">
+          <% if flat.user.avatar.attached? %>
+            <%= cl_image_tag flat.user.avatar.key, alt: "#{flat.user.nickname}'s avatar", width: 40, height: 40, class: 'rounded-full' %>
+          <% else %>
+            <%= icon_for_invitation("admin") %>
+          <% end %>
+          <span class="revealed-text"><%= flat.user.nickname %></span>
+        </div>
+    </div>
+    <div class="flex justify-end">
+      <%= turbo_frame_tag "invitation-#{flat.id}" do %>
+        <%= render 'flats/invitation_flat', flat: flat %>
       <% end %>
-      <span class="revealed-text"><%= flat.user.nickname %></span>
     </div>
   </div>
-  <p class="mb-2 text-sm">
-    <%= flat.address %>
-  </p>
-  <%= turbo_frame_tag "invitation-#{flat.id}" do %>
-    <%= render 'flats/invitation_flat', flat: flat %>
-  <% end %>
-</div>
+<% end %>
