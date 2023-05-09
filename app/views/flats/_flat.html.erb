@@ -33,12 +33,12 @@
       </div>
     </div>
     <div class="flex justify-between items-end">
-      <div class="flex">
-        <div class="shadow-lg bg-white p-2 mr-2 rounded">
+      <div class="mb:flex">
+        <div class="shadow-lg bg-white p-2 mr-2 mb-2 md:mb-0 rounded">
           <p class="underline mb-2">Budget</p>
           <div class="flex items-center"><span class="text-base font-bold"><%= number_to_euros(flat.budget_left) %></span> <span class="text-xs pl-2">/ <%= number_to_euros(flat.budget) %></span></div>
         </div>
-        <div class="shadow-lg bg-white p-2 mr-2 rounded">
+        <div class="shadow-lg bg-white p-2 mr-2 mb-2 md:mb-0 rounded">
           <p class="underline mb-2">Items</p>
           <div class="flex items-center"><span class="text-base "><%= pluralize(flat.items.count, "item") %></span></div>
         </div>
