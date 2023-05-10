@@ -1,6 +1,6 @@
 <%= turbo_frame_tag option , class:'group' do %>
   <div class="flex flex-col justify-start items-center border relative mt-4 md:mt-0 h-72 h-max rounded">
-    <%= link_to option.url, target: '_blank' do %>
+    <%= link_to secure_url_for(option.url), target: '_blank' do %>
       <%= cl_image_tag option.image.key, width: 320, height: 320, crop: :fit, class: 'w-full object-cover h-52 max-h-52' if option.image.attached? %>
       <div class='flex flex-col justify-center items-center px-3 pb-3'>
         <h3 class="text-center"><span class="text-lg font-bold"><%= option.name %></span> - <%= number_to_euros(option.price) %></h3>

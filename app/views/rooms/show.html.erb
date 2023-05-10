@@ -1,36 +1,36 @@
-<%= link_to flat_path(@flat), class:'text-xs underline text-white mb-2' do %>
-  <i class="fa-solid fa-arrow-left"></i>
-  back to your flat
-<% end %>
-
-<div class="bg-white text-emerald-950 my-2 p-4 rounded">
-  <div class="flex justify-between items-center mb-2">
+<%= turbo_frame_tag "main-content" do %>
+  <div class="bg-white text-emerald-950 my-2 p-4 rounded">
+    <%= link_to flat_path(@flat), class:'text-xs underline text-slate-500' do %>
+      <i class="fa-solid fa-arrow-left"></i>
+      back to <%= @flat.name.downcase %>'s rooms
+    <% end %>
     <%= turbo_frame_tag @room do %>
-      <h2 class="text-lg">List of items for <%= @room.name %></h2>
-    <% end %>
-      <div class="flex">
-        <%= link_to edit_flat_room_path(@flat, @room),
-          class: "reveal-btn reveal-btn-success",
-          data: { turbo_frame: dom_id(@room)} do %>
-          <i class="fa-solid fa-pencil"></i>
-          <span class="revealed-text">edit this room</span>
-        <% end %>
-        <%= link_to new_room_item_path(@room),
-                    class: "reveal-btn reveal-btn-primary",
-                    data: { turbo_frame: dom_id(@item) } do %>
-          <i class="fa-solid fa-plus"></i>
-          <span class="revealed-text">add an item</span>
-        <% end %>
+      <div class="flex justify-between items-center my-2">
+        <h2 class="text-lg">Items for <%= @room.name %></h2>
+        <div class="flex">
+          <%= link_to edit_flat_room_path(@flat, @room),
+            class: "reveal-btn reveal-btn-success",
+            data: { turbo_frame: dom_id(@room)} do %>
+            <i class="fa-solid fa-pencil"></i>
+            <span class="revealed-text">edit this room</span>
+          <% end %>
+          <%= link_to new_room_item_path(@room),
+                      class: "reveal-btn reveal-btn-primary",
+                      data: { turbo_frame: dom_id(@item) } do %>
+            <i class="fa-solid fa-plus"></i>
+            <span class="revealed-text">add an item</span>
+          <% end %>
+        </div>
       </div>
-  </div>
-  <p class="text-sm text-slate-500">Here you can see all the items you need for this room.</p>
-  <p class="text-sm text-slate-500">Add has many items as you want using the form up there to the right.</p>
-  <div class="flex flex-col">
-    <%= turbo_frame_tag @item %>
-
-    <%= turbo_frame_tag "items" do %>
-      <%= render @items %>
     <% end %>
-  </div>
-</div>
+    <p class="text-sm text-slate-500">Here you can see all the items you need for this room.</p>
+    <p class="text-sm text-slate-500">Add has many items as you want using the form up there to the right.</p>
+    <div class="flex flex-col">
+      <%= turbo_frame_tag @item %>
 
+      <%= turbo_frame_tag "items" do %>
+        <%= render @items %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

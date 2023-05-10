@@ -21,19 +21,20 @@
       <%= option.errors.full_messages.to_sentence.capitalize %>
     </div>
   <% end %>
-
-  <%= f.input :name, label: false, placeholder: 'a name for this option..', wrapper_html: { class: 'mb-1 w-full'}, input_html: { class:'border-none box-shadow-none focus:shadow-none' } %>
-  <%= f.input :description, label: false, placeholder: 'a short description', wrapper_html: { class: 'mb-1 w-full'}, input_html: { class:'border-none box-shadow-none focus:shadow-none' } %>
-  <%= f.input :size, label: false, placeholder: '200 x 100 cm, 3 seats.. or leave empty !', wrapper_html: { class: 'mb-1 w-full'}, input_html: { class:'border-none box-shadow-none focus:shadow-none' } %>
-  <%= f.input :price, label: false, placeholder: '200€', wrapper_html: { class: 'mb-1 w-full'}, input_html: { class:'border-none box-shadow-none focus:shadow-none' } %>
-  <%= f.input :url, label: false, placeholder: 'https://www.alicelahana-store.com', wrapper_html: { class: 'mb-1 w-full'}, input_html: { class:'border-none box-shadow-none focus:shadow-none' } %>
+  <div class="flex">
+    <%= f.input :name, label: false, placeholder: 'a name for this option..', wrapper_html: { class: 'mb-1 w-full'}, input_html: { class:'border-none box-shadow-none focus:shadow-none text-sm text-slate-900' } %>
+    <%= f.input :price, label: false, placeholder: '200€', wrapper_html: { class: 'mb-1 w-full'}, input_html: { class:'border-none box-shadow-none focus:shadow-none text-sm text-slate-900' } %>
+  </div>
+  <%= f.input :description, label: false, placeholder: 'a short description', wrapper_html: { class: 'mb-1 w-full'}, input_html: { class:'border-none box-shadow-none focus:shadow-none text-sm text-slate-900' } %>
+  <%= f.input :size, label: false, placeholder: '200 x 100 cm, 3 seats.. or leave empty !', wrapper_html: { class: 'mb-1 w-full'}, input_html: { class:'border-none box-shadow-none focus:shadow-none text-sm text-slate-900' } %>
+  <%= f.input :url, label: false, placeholder: 'https://www.alicelahana-store.com', wrapper_html: { class: 'mb-1 w-full'}, input_html: { class:'border-none box-shadow-none focus:shadow-none text-sm text-slate-900' } %>
 
   <div class="flex justify-end w-full mt-2">
     <%= button_tag type: 'submit', class: "text-white bg-emerald-500 py-1 px-4 rounded w-full text-center grow" do %>
       <i class="fa-solid fa-floppy-disk mr-1"></i>
       save
     <% end %>
-    <%= button_tag type: 'button', class: 'text-white bg-red-500 py-1 px-4 rounded ml-2',  data: { modal_hide: "popup-modal" } do %>
+    <%= link_to room_item_path(@item.room, @item), class: "text-white bg-red-500 py-1 px-4 rounded ml-2" do %>
       <i class="fas fa-times"></i>
     <% end %>
   </div>

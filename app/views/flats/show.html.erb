@@ -1,32 +1,25 @@
-<%= link_to dashboard_path, class:'text-xs underline text-white mb-2' do %>
-  <i class="fa-solid fa-arrow-left"></i>
-  back to your dashboard
-<% end %>
-
-<div class="my-2">
-</div>
-
 <div class="bg-gray-50 text-emerald-950 my-2 p-4 rounded">
-  <div class="flex justify-between items-center mb-2">
+  <div class="flex justify-between items-center mb-4">
     <div>
       <h2 class="text-2xl"><%= @flat.name %></h2>
       <p class=""><%= @flat.address %></p>
     </div>
-    <div class="flex justify-end items-center">
-      <% if policy(@flat.invitations.new).new? %>
-        <%= link_to new_flat_invitation_path(@flat), class:'reveal-btn reveal-btn-success w-max text-sm mr-2 mb-2', data: { turbo_frame: dom_id(@invitation) } do %>
-          <i class="fa-solid fa-user-plus"></i>
-          <span class="revealed-text">invite someone</span>
+    <%= turbo_frame_tag @invitation do %>
+      <div class="flex justify-end items-center">
+        <% if policy(@flat.invitations.new).new? %>
+          <%= link_to new_flat_invitation_path(@flat), class:'reveal-btn reveal-btn-success w-max text-sm mr-2 mb-2', data: { turbo_frame: dom_id(@invitation) } do %>
+            <i class="fa-solid fa-user-plus"></i>
+            <span class="revealed-text">invite someone</span>
+          <% end %>
         <% end %>
-      <% end %>
-      <%= turbo_frame_tag @invitation %>
 
-      <%= turbo_frame_tag "invitations" do %>
-        <div class="flex flex-wrap items-center">
-          <%= render @invitations %>
-        </div>
-      <% end %>
-    </div>
+        <%= turbo_frame_tag "invitations" do %>
+          <div class="flex flex-wrap items-center">
+            <%= render @invitations %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
     <div class="flex flex-col justify-between items-center px-2 py-4 h-36 shadow-lg bg-white rounded-lg text-green-950 text-center">
@@ -64,19 +57,21 @@
 
 
 <% if (@current_user_invitation && @current_user_invitation&.accepted?) || @flat.user == current_user %>
-  <div class="bg-blue-50 text-emerald-950 my-2 p-4 rounded">
-    <div class="block justify-between items-center mb-2">
-      <h3 class="text-lg mb-2">Rooms</h3>
-      <%= turbo_frame_tag @room do %>
-        <%= render "rooms/form", room: @room %>
-      <% end %>
-    </div>
+  <%= turbo_frame_tag "main-content" do %>
+    <div class="bg-gradient-to-b from-slate-50 to-blue-50 text-emerald-950 my-2 p-4 rounded">
+      <div class="block justify-between items-center mb-2">
+        <h3 class="text-lg mb-2 text-blue-600">Rooms</h3>
+        <%= turbo_frame_tag @room do %>
+          <%= render "rooms/form", room: @room %>
+        <% end %>
+      </div>
 
-    <div class="flex flex-col">
-      <%= turbo_frame_tag "rooms", class:'md:grid md:grid-cols-3 gap-3 mt-4 md:grid-flow-dense' do %>
-        <%= render @rooms %>
-      <% end %>
+      <div class="flex flex-col">
+        <%= turbo_frame_tag "rooms", class:'md:grid md:grid-cols-3 gap-3 mt-4 md:grid-flow-dense' do %>
+          <%= render @rooms %>
+        <% end %>
+      </div>
     </div>
-  </div>
+  <% end %>
 <% end %>
 
