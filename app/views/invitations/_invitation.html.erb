@@ -1,16 +1,10 @@
 <%= turbo_frame_tag invitation do %>
-  <p class="rounded-full <%= color_for_invitation(invitation.status)%> group flex items-center justify-between text-sm mr-2 mb-2 reveal-btn reveal-btn-avatar min-w-5 min-h-5">
-    <% if invitation.level %>
-      <%= icon_for_invitation(invitation.level).html_safe %>
-      <% if invitation.user.avatar.attached? %>
-        <%= cl_image_tag invitation.user.avatar.key, alt: "#{invitation.user.nickname}'s avatar", width: 30, height: 30, crop: 'fill', class:'rounded-full w-5 h-5' %>
-      <% end %>
+  <p class="rounded-full <%= color_for_invitation(invitation.status)%> group flex items-center justify-center text-sm mr-2 mb-2 reveal-btn reveal-btn-avatar min-w-5 min-h-5">
+    <span class="absolute -top-4"><%= icon_for_invitation(invitation.level).html_safe if invitation.admin? %></span>
+    <% if invitation.user.avatar.attached? %>
+      <%= cl_image_tag invitation.user.avatar.key, alt: "#{invitation.user.nickname}'s avatar", width: 30, height: 30, crop: 'fill', class:'rounded-full w-5 h-5' %>
     <% else %>
-      <% if invitation.user.avatar.attached? %>
-        <%= cl_image_tag invitation.user.avatar.key, alt: "#{invitation.user.nickname}'s avatar", width: 30, height: 30, crop: 'fill', class:'rounded-full w-5 h-5' %>
-      <% else %>
-        <%= icon_for_invitation(invitation.level).html_safe %>
-      <% end %>
+      <%= icon_for_invitation("invited").html_safe %>
     <% end %>
 
     <span class="revealed-text">

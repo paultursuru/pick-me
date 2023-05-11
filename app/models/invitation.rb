@@ -10,8 +10,4 @@ class Invitation < ApplicationRecord
   enum level: { invited: 0, admin: 1 }
 
   scope :pending_or_accepted, -> { where(status: [0, 1]) }
-
-  def admin?
-    status == "admin"
-  end
 end
