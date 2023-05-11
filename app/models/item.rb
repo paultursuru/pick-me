@@ -23,9 +23,9 @@ class Item < ApplicationRecord
     return nil if prices.empty?
 
     if prices.min == prices.max
-      ActionController::Base.helpers.number_to_currency(prices.min, unit: '€')
+      ApplicationController.helpers.number_to_euros(prices.min)
     else
-      ActionController::Base.helpers.number_to_currency(prices.min, unit: '€') + ' - ' + ActionController::Base.helpers.number_to_currency(prices.max, unit: '€')
+      ApplicationController.helpers.number_to_euros(prices.min) + ' - ' + ApplicationController.helpers.number_to_euros(prices.max)
     end
   end
 
