@@ -20,6 +20,10 @@ class ItemPolicy < ApplicationPolicy
     show?
   end
 
+  def quick_create_option?
+    show?
+  end
+
   def edit?
     show?
   end

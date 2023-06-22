@@ -1,4 +1,6 @@
 class Option < ApplicationRecord
+  attr_accessor :image_url # needed for scrapper creation
+
   belongs_to :item
   has_many :votes, dependent: :destroy
 

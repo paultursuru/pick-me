@@ -32,6 +32,17 @@ class ItemsController < ApplicationController
     end
   end
 
+  def quick_create_option
+    @item = Item.find(params[:id])
+    authorize @item
+
+    @url = params[:url]
+    # @option = @item.options.new
+    @option_scrapped = OptionScrapper.call(url: @url)
+    @option_scrapped.item = @item
+    @option_scrapped
+  end
+
   def edit
     @item = @room.items.find(params[:id])
     authorize @item

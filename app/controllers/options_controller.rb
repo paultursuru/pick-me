@@ -9,6 +9,11 @@ class OptionsController < ApplicationController
   def create
     @option = @item.options.new(option_params)
     authorize @option
+    if url = params[:option][:image_url]
+      file = URI.open(url)
+      @option.image.attach(io: file, filename: "option.png", content_type: "image/png")
+    end
+
     if @option.save
       respond_to do |format|
         format.html { redirect_to room_item_path(@item.room, @item) }
