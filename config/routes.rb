@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   end
   resources :items, only: [] do
     resources :options, only: [:new, :create, :edit, :update, :destroy]
+    member do
+      get :quick_create_option
+    end
   end
   resources :options, only: [] do
     resources :votes, only: [:create, :update]
