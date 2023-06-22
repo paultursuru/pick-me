@@ -3,7 +3,6 @@ class FlatsController < ApplicationController
 
   def show
     @flat = Flat.find(params[:id])
-    @priciest_item = @flat.priciest_item
     authorize @flat
     @rooms = @flat.rooms.ordered
     @room = Room.new

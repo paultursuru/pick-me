@@ -1,0 +1,32 @@
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+    <div class="flex flex-col justify-between items-center px-2 py-4 h-36 shadow-lg bg-white rounded-lg text-green-950 text-center">
+      <h3 class="text-xl">Budget</h3>
+      <div class="flex flex-col items-center justify-between h-full">
+        <p class="py-3"><%= number_to_euros(flat.budget_left) %></p>
+        <div>
+          <span class="text-xs">estimated cost</span>
+          <p class="text-xs"><%= number_to_euros(flat.estimated_total_cost_for_all_rooms) %> / <%= number_to_euros(flat.budget) %></p>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col justify-between items-center p-2 h-36 shadow-lg bg-white rounded-lg text-green-950 text-center">
+      <h3 class="text-xl">Items</h3>
+      <div class="flex flex-col items-center justify-center h-full">
+        <p class="text-base py-3"><%= pluralize(flat.items.count, 'item') %></p>
+        <% if flat.priciest_item %>
+          <span class="text-xs">priciest item</span>
+          <p class="text-sm"><%= flat.priciest_item.name %> - <%= number_to_euros(flat.priciest_item&.price) %></p>
+        <% end %>
+      </div>
+    </div>
+    <div class="flex flex-col justify-between items-center p-2 h-36 shadow-lg bg-white rounded-lg text-green-950 text-center">
+      <h3 class="text-xl">Options</h3>
+      <div class="flex flex-col items-center justify-center h-full">
+        <p class="text-base py-3"><%= pluralize(flat.options.count, 'option') %></p>
+        <% unless flat.options.empty? %>
+          <span class="text-xs">favorited <i class="fa-solid fa-heart text-red-500"></i></span>
+          <p class="text-sm"><%= flat.options.favorited.count %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>

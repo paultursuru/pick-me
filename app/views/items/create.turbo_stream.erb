@@ -1,2 +1,5 @@
 <%= turbo_stream.prepend "items", @item %>
 <%= turbo_stream.update @room.items.new, "" %>
+<%= turbo_stream.update 'flat_budget' do %>
+  <%= render partial: "flats/flat_budget", locals: { flat: @item.flat } %>
+<% end %>

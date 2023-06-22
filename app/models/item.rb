@@ -12,8 +12,12 @@ class Item < ApplicationRecord
   scope :by_importance, -> { order(importance: :desc) }
   scope :ordered, -> { order(created_at: :desc) }
 
+  def flat
+    room.flat
+  end
+
   def options_average_price
-    return 0 if options.nil?
+    return 0 if (options.nil? || options.empty?)
 
     options.map(&:price).sum.to_f / options.count
   end

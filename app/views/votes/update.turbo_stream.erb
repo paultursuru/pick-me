@@ -2,3 +2,6 @@
 <%#= turbo_stream.update @flat.items.new, "" %>
 <%# replace vote on the option using turbo stream %>
 <%#= turbo_stream.replace @vote, partial: "votes/vote", locals: { vote: @vote } %>
+<%= turbo_stream.update 'flat_budget' do %>
+  <%= render partial: "flats/flat_budget", locals: { flat: @item.flat } %>
+<% end %>

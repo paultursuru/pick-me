@@ -1,3 +1,6 @@
 <%= turbo_stream.update @item.votes.new do %>
   <%= render 'votes/form', option: @option, vote: @vote %>
 <% end %>
+<%= turbo_stream.update 'flat_budget' do %>
+  <%= render partial: "flats/flat_budget", locals: { flat: @item.flat } %>
+<% end %>

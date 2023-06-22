@@ -1,1 +1,4 @@
 <%= turbo_stream.remove @item %>
+<%= turbo_stream.update 'flat_budget' do %>
+  <%= render partial: "flats/flat_budget", locals: { flat: @item.flat } %>
+<% end %>
