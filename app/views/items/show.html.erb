@@ -1,44 +1,42 @@
 <%= turbo_frame_tag "main-content" do %>
-  <div class="bg-white text-emerald-950 my-2 p-4 rounded">
+  <div class="bg-slate-50 text-emerald-950 my-2 p-4 rounded">
     <%= link_to flat_room_path(@room.flat, @room), class:'text-xs underline text-slate-500' do %>
       <i class="fa-solid fa-arrow-left"></i>
       back to <%= @room.name.downcase %>'s items
     <% end %>
     <div class="flex justify-between items-center my-2">
       <h2 class="text-xl">Options for <%= @item.name %></h2>
-      <div class="flex">
-        <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="text-blue-500 hover:bg-blue-700 hover:text-blue-100 border flex items-center justify-center border-blue-500 bg-blue-100 py-1 px-2 rounded text-sm group h-8 w-8">
-          <i class="fa-solid fa-plus"></i>
-          <span class="w-0 h-0 opacity-0 flex overflow-hidden group-hover:ml-2 group-hover:w-max group-hover:h-max group-hover:opacity-100 transition-all duration-300">add an option</span>
-        </button>
-        <%= form_with url: quick_create_option_item_path(@item), method: :get, class:'w-max text-sm text-yellow-800 border border-yellow-800 bg-yellow-100 rounded ml-2 p-2', data: {turbo_frame: 'quick_add'} do |form| %>
-          <span class="block text-sm">Flash import a product from Ikea</span>
-          <%= form.text_field :url, placeholder: 'link to the product : https://ikea.com/...', class:"border-none box-shadow-none focus:shadow-none rounded-xl placeholder:text-slate-400 mr-0 p-0 text-sm" %>
-          <%= button_tag type: "submit", class: "bg-yellow-800 text-yellow-100 rounded p-1" do %>
-            <i class="fa-solid fa-plus text-sm"></i>
-            <i class="fa-solid fa-bolt text-sm"></i>
-          <% end %>
-        <% end %>
-      </div>
     </div>
     <p class="text-sm text-slate-500">Here you can see all the options you have for <%= @item.name %>. Add has many options as you want.</p>
     <p class="text-sm text-slate-500">You can vote for the options you prefer. The most voted option will be added to your general list !</p>
-    <%= turbo_frame_tag 'quick_add' %>
+      <div class="flex my-4 items-center justify-center rounded">
+        <%= link_to new_item_option_path(@item),
+                      class: "w-max text-sm flex items-center text-blue-800 border bg-blue-100 overflow-hidden rounded-xl pl-3 shadow-lg",
+                      data: { turbo_frame: dom_id(@option) } do %>
+          <span class="mr-2">add an option</span>
+          <span class="h-12 p-2 bg-blue-900 text-blue-100 flex items-center">
+            <i class="fa-solid fa-plus"></i>
+          </span>
+        <% end %>
+        <p class="p-4">or</p>
+        <%= form_with url: quick_create_option_item_path(@item), method: :get, class:'w-max flex items-center text-sm text-yellow-900 bg-yellow-500 rounded-xl overflow-hidden ml-2 pl-3 shadow-lg', data: {turbo_frame: 'quick_add'} do |form| %>
+          <div>
+            <p class="p-0 m-0">import an option</p>
+            <p class="p-0 m-0 text-xs">copy-paste a link for your product</p>
+          </div>
+          <%= form.text_field :url, placeholder: 'https://ikea.com/... , https://habitat.com/... ', class:"border-none box-shadow-none focus:shadow-none rounded-xl placeholder:text-slate-400 mx-2 text-sm" %>
+          <%= button_tag type: "submit", class: "bg-yellow-900 text-yellow-500 hover:bg-yellow-700 p-2 h-12" do %>
+            <i class="fa-solid fa-plus"></i>
+            <i class="fa-solid fa-bolt"></i>
+          <% end %>
+        <% end %>
+      </div>
     <div class="flex flex-col">
+    <%= turbo_frame_tag 'quick_add' %>
+    <%= turbo_frame_tag @option %>
       <%= turbo_frame_tag "options", class:'md:grid md:grid-cols-3 gap-3 mt-4 md:grid-flow-dense' do %>
         <%= render @options %>
       <% end %>
-    </div>
-  </div>
-  <div id="popup-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full bg-slate-500/[.06] backdrop-blur-sm">
-    <div class="relative w-full max-w-md max-h-full">
-      <div class="relative bg-transparent rounded-lg dark:bg-gray-700">
-        <div class="text-center">
-          <%= turbo_frame_tag @option, class: 'md:max-w-sm md:mx-auto' do %>
-            <%= render 'options/form', option: @option %>
-          <% end %>
-        </div>
-      </div>
     </div>
   </div>
 <% end %>

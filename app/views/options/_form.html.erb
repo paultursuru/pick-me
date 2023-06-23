@@ -33,7 +33,7 @@
       <i class="fa-solid fa-floppy-disk mr-1"></i>
       save
     <% end %>
-    <%= button_tag type: 'button', class: 'text-white bg-red-500 py-1 px-4 rounded ml-2',  data: { modal_hide: "popup-modal" } do %>
+    <%= link_to room_item_path(@item.room, @item), class: "text-white bg-red-500 py-1 px-4 rounded ml-2" do %>
       <i class="fas fa-times"></i>
     <% end %>
   </div>

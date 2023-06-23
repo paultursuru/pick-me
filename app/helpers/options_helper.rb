@@ -6,4 +6,10 @@ module OptionsHelper
       content_tag(:p, option_stars, class: 'absolute text-sm text-yellow-100')
     end
   end
+
+  def domain_for(url)
+    url = "http://#{url}" if URI.parse(url).scheme.nil?
+    host = URI.parse(url).host.downcase
+    (host.start_with?('www.') ? host[4..-1] : host).split(".").first.gsub("_", " ")
+  end
 end
