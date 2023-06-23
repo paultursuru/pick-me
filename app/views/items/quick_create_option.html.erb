@@ -1,21 +1,21 @@
 <%= turbo_frame_tag 'quick_add' do %>
-  <div class="text-yellow-800 border border-yellow-800 bg-yellow-100 rounded ml-2 p-2">
-    <p class="text-base">Here is what we found on IKEA <%= link_to @url, target: '_blank' do %><i class="fa-solid fa-link"></i><% end %></p>
-    <p class="text-sm">Feel free to correct or complete what we missed before adding this option to your list !</p>
+  <div class="text-yellow-800 bg-yellow-100 rounded p-4">
+    <p class="text-base">Here is what we found on <%= domain_for(@url) %> <%= link_to @url, target: '_blank' do %><i class="fa-solid fa-link"></i><% end %></p>
+    <p class="text-sm mb-4">Feel free to correct or complete what we missed before adding this option to your list !</p>
     <%= simple_form_for [@item, @option_scrapped] do |f| %>
-      <div class="flex align-center">
-        <img src="<%= @option_scrapped.image_url %>" alt="" class="w-40 h-40 rounded">
-        <div class="flex flex-wrap">
-          <%= f.input :name, input_html: {class: "border-none"}, label_html: {class: "text-sm text-yellow-700"}, wrapper_html: {class: 'p-2'} %>
-          <%= f.input :price, input_html: {class: "border-none"}, label_html: {class: "text-sm text-yellow-700"}, wrapper_html: {class: 'p-2'} %>
-          <%= f.input :size, input_html: {class: "border-none", placeholder: "we couldn't find the size for this object"}, label_html: {class: "text-sm text-yellow-700"}, wrapper_html: {class: 'p-2'} %>
-          <%= f.input :description, as: :text, input_html: {class: "border-none"}, label_html: {class: "text-sm text-yellow-700"}, wrapper_html: {class: 'p-2'} %>
+      <div class="flex align-center justify-center">
+        <img src="<%= @option_scrapped.image_url %>" alt="" class="w-52 rounded object-cover">
+        <div class="flex flex-wrap justify-center w-80">
+          <%= f.input :name, input_html: {class: "border-none"}, label_html: {class: "text-sm text-yellow-700"}, wrapper_html: {class: 'p-4'} %>
+          <%= f.input :price, input_html: {class: "border-none"}, label_html: {class: "text-sm text-yellow-700"}, wrapper_html: {class: 'p-4'} %>
+          <%= f.input :description, as: :text, input_html: {class: "border-none h-40"}, label_html: {class: "text-sm text-yellow-700"}, wrapper_html: {class: 'p-4'} %>
+          <%= f.input :size, input_html: {class: "border-none", placeholder: "we couldn't find the size for this object"}, label_html: {class: "text-sm text-yellow-700"}, wrapper_html: {class: 'p-4'} %>
         </div>
       </div>
       <%= f.input :url, input_html: {value: @url, class: 'hidden' }, label: false %>
       <%= f.input :image_url, input_html: {class: 'hidden'}, label: false %>
 
-      <div class="flex w-full md:w-fit items-center mt-2">
+      <div class="flex w-full md:w-fit items-center mt-4">
       <%= button_tag type: "submit", class: 'bg-yellow-800 text-yellow-100 py-1 px-4 rounded grow md:grow-0 flex items-center justify-center' do %>
         <i class="fa-solid fa-plus mr-1 md:mr-2"></i>
         Add this option
