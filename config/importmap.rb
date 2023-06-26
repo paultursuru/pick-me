@@ -12,3 +12,4 @@ pin "@fortawesome/free-regular-svg-icons", to: "https://ga.jspm.io/npm:@fortawes
 pin "@fortawesome/free-solid-svg-icons", to: "https://ga.jspm.io/npm:@fortawesome/free-solid-svg-icons@6.4.0/index.mjs"
 pin "star-rating.js", to: "https://cdn.jsdelivr.net/npm/star-rating.js@4.3.0/dist/star-rating.esm.js"
 pin "flowbite", to: "https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.turbo.min.js"
+pin_all_from "app/javascript/custom", under: "custom"
