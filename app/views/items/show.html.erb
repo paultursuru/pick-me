@@ -11,29 +11,29 @@
     <p class="text-sm text-slate-500">You can vote for the options you prefer. The most voted option will be added to your general list !</p>
       <div class="flex my-4 items-center justify-center rounded">
         <%= link_to new_item_option_path(@item),
-                      class: "w-max text-sm flex items-center text-blue-800 border bg-blue-100 overflow-hidden rounded-xl pl-3 shadow-lg",
+                      class: "w-max text-sm flex flex-col sm:flex-row items-center text-center text-blue-800 border bg-blue-100 overflow-hidden rounded-xl sm:pl-3 shadow-lg",
                       data: { turbo_frame: dom_id(@option) } do %>
-          <span class="mr-2">add an option</span>
-          <span class="h-12 p-2 bg-blue-900 text-blue-100 flex items-center">
+          <p class="m-3 sm:mr-2 sm:my-0 sm:ml-0">add an option</span></p>
+          <p class="h-12 p-2 bg-blue-900 text-blue-100 flex items-center justify-center w-full sm:w-auto">
             <i class="fa-solid fa-plus"></i>
-          </span>
+          </p>
         <% end %>
-        <p class="p-4">or</p>
-        <%= form_with url: quick_create_option_item_path(@item), method: :get, class:'w-max flex items-center text-sm text-yellow-900 bg-yellow-500 rounded-xl overflow-hidden ml-2 pl-3 shadow-lg', data: {turbo_frame: 'quick_add'} do |form| %>
-          <div>
-            <p class="p-0 m-0">import an option</p>
+        <p class="p-4 sm:text-base text-xs">or</p>
+        <%= form_with url: quick_create_option_item_path(@item), method: :get, class:'w-max flex flex-col items-center text-center text-sm text-yellow-900 bg-yellow-500 rounded-xl overflow-hidden m-0 p-0 shadow-lg', data: {turbo_frame: 'quick_add'} do |form| %>
+          <div class="p-2">
+            <p class="p-0 m-0">import <span class="hidden sm:visible">options</span></p>
             <p class="p-0 m-0 text-xs">copy-paste a link for your product</p>
           </div>
-          <%= form.text_field :url, placeholder: 'https://ikea.com/... , https://habitat.com/... ', class:"border-none box-shadow-none focus:shadow-none rounded-xl placeholder:text-slate-400 mx-2 text-sm" %>
-          <%= button_tag type: "submit", class: "bg-yellow-900 text-yellow-500 hover:bg-yellow-700 p-2 h-12" do %>
+          <%= form.text_field :url, placeholder: 'https://ikea.com/... , https://habitat.com/... ', class:"border-none box-shadow-none focus:shadow-none rounded-xl placeholder:text-slate-400 mx-2 mb-2 px-2 pb-2 text-sm w-11/12" %>
+          <%= button_tag type: "submit", class: "bg-yellow-900 text-yellow-500 hover:bg-yellow-700 p-2 h-12 w-full" do %>
             <i class="fa-solid fa-plus"></i>
             <i class="fa-solid fa-bolt"></i>
           <% end %>
         <% end %>
       </div>
     <div class="flex flex-col">
-    <%= turbo_frame_tag 'quick_add' %>
-    <%= turbo_frame_tag @option %>
+      <%= turbo_frame_tag 'quick_add' %>
+      <%= turbo_frame_tag @option %>
       <%= turbo_frame_tag "options", class:'md:grid md:grid-cols-3 gap-3 mt-4 md:grid-flow-dense' do %>
         <%= render @options %>
       <% end %>
