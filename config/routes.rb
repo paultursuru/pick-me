@@ -25,4 +25,7 @@ Rails.application.routes.draw do
   resources :options, only: [] do
     resources :votes, only: [:create, :update]
   end
+
+  get "/service-worker.js" => "service_worker#service_worker"
+  get "/manifest.json" => "service_worker#manifest"
 end
