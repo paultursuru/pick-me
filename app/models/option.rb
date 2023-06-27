@@ -9,8 +9,8 @@ class Option < ApplicationRecord
   validates :price, numericality: { greater_than: 0 }
 
   scope :sort_by_price, -> { order(price: :desc) }
-  scope :favorited, -> { select {|opt| opt.average_stars == 5 } }
-  scope :top_voted, -> { select {|opt| opt.average_stars >= 3 } }
+  scope :favorited, -> { select { |opt| opt.average_stars == 5 } }
+  scope :top_voted, -> { select { |opt| opt.average_stars >= 3 } }
 
   has_one_attached :image
 

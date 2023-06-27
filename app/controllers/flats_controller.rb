@@ -59,6 +59,7 @@ class FlatsController < ApplicationController
     @flat = Flat.find(params[:id])
     authorize @flat
   end
+
   def flat_params
     params.require(:flat).permit(:name, :address, :budget, :photo)
   end
