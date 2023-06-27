@@ -34,6 +34,8 @@ class Item < ApplicationRecord
   end
 
   def five_star_options_total_price
-    options.where(rating: 5).map(&:price).sum
+    return 0 if options.favorited.empty?
+
+    options.favorited.map(&:price).sum
   end
 end
