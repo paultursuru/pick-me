@@ -1,6 +1,6 @@
 <%= turbo_frame_tag item , class:'group' do %>
   <div class="flex justify-between items-center border-b border-solid">
-    <%= link_to room_item_path(@room, item), class:'grid grid-cols-3 justify-between items-center w-full p-1 hover:bg-sky-100 transition duration-300 rounded', data: {turbo_frame: "main-content"} do %>
+    <%= link_to room_item_path(@room, item), id: "item_link_#{item.id}", class:'grid grid-cols-3 justify-between items-center w-full p-1 hover:bg-sky-100 transition duration-300 rounded', data: {turbo_frame: "main-content"} do %>
       <div class='place-self-left flex group-hover:underline text-sm md:text-base font-bold'>
         <%= item.name %>
       </div>
