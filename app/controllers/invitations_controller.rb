@@ -58,10 +58,10 @@ class InvitationsController < ApplicationController
     # if @flat.user == current_user
     #   redirect_to dashboard_path, status: :see_other, target: '_top'
     # else
-      respond_to do |format|
-        format.html { redirect_to flat_path(@invitation.flat), status: :see_other }
-        format.turbo_stream
-      end
+    respond_to do |format|
+      format.html { redirect_to flat_path(@invitation.flat), status: :see_other }
+      format.turbo_stream
+    end
     # end
   end
 
