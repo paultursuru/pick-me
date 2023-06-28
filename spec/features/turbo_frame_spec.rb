@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative '../support/devise'
 
-RSpec.feature "Flats", type: :feature, js: true do
+RSpec.feature "Turbo Frames", type: :feature, js: true do
   context "when logged in" do
     user = FactoryBot.create(:user)
     flat = FactoryBot.create(:flat, user: user)
@@ -14,7 +14,7 @@ RSpec.feature "Flats", type: :feature, js: true do
       login_as(user, scope: :user)
     end
 
-    scenario "a user can go from dashboard to options through rooms and items frames" do
+    scenario "a user can go from dashboard to a flat and from here all the way to options through turbo frames" do
       visit dashboard_path
       flats_frame = find("turbo-frame#flats")
       expect(flats_frame).to be_present
