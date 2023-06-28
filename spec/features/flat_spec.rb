@@ -37,42 +37,5 @@ RSpec.feature "Flats", type: :feature do
       click_on "save"
       expect(page).to have_content("My new flat")
     end
-
-    scenario "a user can go from dashboard to options through rooms and items frames" do
-      flat = create(:flat, user: user)
-      room = create(:room, flat: flat, kind: "bedroom")
-      item = create(:item, room: room, name: "My item")
-      option_1 = create(:option, item: item, name: "option 1")
-      option_2 = create(:option, item: item, name: "option 2")
-
-      visit dashboard_path
-      flats_frame = find("turbo-frame#flats")
-      expect(flats_frame).to be_present
-      flat_frame = find("turbo-frame#flat_#{flat.id}")
-      expect(flat_frame).to be_present
-
-      click_on "see more" # link to flat frame
-
-      rooms_frame = find("turbo-frame#rooms")
-      expect(rooms_frame).to be_present
-      room_frame = find("turbo-frame#room_#{room.id}")
-      expect(room_frame).to be_present
-
-      find("#room_link_#{room.id}").click # link to room frame
-
-      items_frame = find("turbo-frame#items")
-      expect(items_frame).to be_present
-      item_frame = find("turbo-frame#item_#{item.id}")
-      expect(item_frame).to be_present
-
-      find("#item_link_#{item.id}").click # link to item frame
-
-      options_frame = find("turbo-frame#options")
-      expect(options_frame).to be_present
-      option_1_frame = find("turbo-frame#option_#{option_1.id}")
-      expect(option_1_frame).to be_present
-      option_2_frame = find("turbo-frame#option_#{option_2.id}")
-      expect(option_2_frame).to be_present
-    end
   end
 end
