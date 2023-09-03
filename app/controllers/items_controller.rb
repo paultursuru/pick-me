@@ -39,8 +39,12 @@ class ItemsController < ApplicationController
     @url = params[:url]
     # @option = @item.options.new
     @option_scrapped = OptionScrapper.call(url: @url)
-    @option_scrapped.item = @item
-    @option_scrapped
+    if @option_scrapped[:status]
+      @error_message = "Looks like #{@option_scrapped[:website]} doesn't work yet with Pick Me"
+    else
+      @option_scrapped.item = @item
+      @option_scrapped
+    end
   end
 
   def edit
