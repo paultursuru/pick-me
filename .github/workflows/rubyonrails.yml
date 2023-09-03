@@ -42,7 +42,7 @@ jobs:
       # Set Chrome Driver
       - name: Set ChromeDriver version
         run: |
-          echo "Webdrivers::Chromedriver.required_version = '114.0.5735.90'" >> config/initializers/webdrivers.rb
+          echo "Webdrivers::Chromedriver.required_version = '116.0.5845.96'" >> config/initializers/webdrivers.rb
       # Add or replace test runners here
       - name: Run tests
         run: bundle exec rspec spec
