@@ -39,6 +39,10 @@ jobs:
       # Add or replace database setup steps here
       - name: Set up database schema
         run: bin/rails db:schema:load
+      # Set Chrome Driver
+      - name: Set ChromeDriver version
+        run: |
+          echo "Webdrivers::Chromedriver.required_version = '114.0.5735.90'" >> config/initializers/webdrivers.rb
       # Add or replace test runners here
       - name: Run tests
         run: bundle exec rspec spec
