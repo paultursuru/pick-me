@@ -51,6 +51,12 @@ gem "pundit"
 # Cloudinary
 gem 'cloudinary'
 
+# HTTP client for scraping with redirects/cookies/retries
+gem 'faraday'
+gem 'faraday-follow_redirects'
+gem 'faraday-cookie_jar'
+gem 'faraday-retry'
+
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
@@ -59,6 +65,9 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
+
+gem 'pry-byebug'
+gem 'pry-rails'
 
 # Use Sass to process CSS
 # gem "sassc-rails"

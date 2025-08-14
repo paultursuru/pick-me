@@ -11,7 +11,7 @@ class Room < ApplicationRecord
 
   def set_name
     room_count = flat.rooms.where(kind: kind).count
-    room_number = [" - ", room_count].join if room_count > 1
+    room_number = [" ", room_count].join if room_count > 1
     update(name: "#{kind.gsub("_", " ")}#{room_number}")
   end
 

@@ -24,25 +24,25 @@ class OptionScrapper < ApplicationService
   private
 
   def scrapp_url
-    user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:100.0) Gecko/20100101 Firefox/100.0"
-    begin # try to OpenURI with a user-agent
-      html_file = URI.open(@url, "User-Agent" => user_agent).read
-    rescue OpenURI::HTTPError => error
-      # Handle HTTP errors here
+    begin
+      html = HttpClient.call(url: @url)
+    rescue StandardError => error
       @error = error
+      return
     end
-    @html_doc = Nokogiri::HTML.parse(html_file)
+    @html_doc = Nokogiri::HTML.parse(html)
   end
 
+  # This should actually be an AI feature, even though the "og" elements usually work
   def build_option
-    case @domain
-    when "ikea"
-      Option.new with_ikea
-    when "habitat"
-      Option.new with_habitat
-    else
+    # case @domain
+    # when "ikea"
+    #   Option.new with_ikea # Page changed
+    # when "habitat"
+    #   Option.new with_habitat # This store does not exist anymore
+    # else
       Option.new with_og
-    end
+    # end
   end
 
   def get_domain(url)
@@ -79,9 +79,9 @@ class OptionScrapper < ApplicationService
   end
 
   def safe_name
-    if @html_doc.search("title")
+    if @html_doc.search("title").any?
       @html_doc.search("title").first.content
-    elsif @html_doc.search("meta[property='og:title']")
+    elsif @html_doc.search("meta[property='og:title']").any?
       @html_doc.search("meta[property='og:title']").first.attributes["content"].value
     else
       error_for("title")
@@ -89,9 +89,9 @@ class OptionScrapper < ApplicationService
   end
 
   def safe_description
-    if @html_doc.search("meta[name='description']")
+    if @html_doc.search("meta[name='description']").any?
       @html_doc.search("meta[name='description']").first.attributes["content"].value
-    elsif @html_doc.search("meta[property='og:description']")
+    elsif @html_doc.search("meta[property='og:description']").any?
       @html_doc.search("meta[property='og:description']").first.attributes["content"].value
     else
       error_for("description")
@@ -99,11 +99,11 @@ class OptionScrapper < ApplicationService
   end
 
   def safe_price
-    if !@html_doc.search("meta[name='price']").empty?
+    if @html_doc.search("meta[name='price']").any?
       @html_doc.search("meta[name='price']").first.attributes["content"].value
-    elsif !@html_doc.search("meta[property='og:price']").empty?
+    elsif @html_doc.search("meta[property='og:price']").any?
       @html_doc.search("meta[property='og:price']").first.attributes["content"].value
-    elsif !@html_doc.search("meta[property='product:price:amount']").empty?
+    elsif @html_doc.search("meta[property='product:price:amount']").any?
       @html_doc.search("meta[property='product:price:amount']").first.attributes["content"].value
     else
       error_for("price")
