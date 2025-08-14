@@ -35,7 +35,7 @@ RSpec.describe Room, type: :model do
       create(:room, kind: 2, flat: flat)
       room = create(:room, kind: 2, flat: flat)
 
-      expect(room.name).to eq("bedroom - 2")
+      expect(room.name).to eq("bedroom 2")
     end
   end
 end

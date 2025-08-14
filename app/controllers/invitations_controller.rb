@@ -8,7 +8,7 @@ class InvitationsController < ApplicationController
 
   def create
     @invitation = @flat.invitations.new(invite_params)
-    @user = User.find_by(email: params[:invitation][:email])
+    @user = find_or_create_user(params[:invitation][:email])
     authorize @invitation
     if Invitation.where(user: @user, flat: @flat).any?
       @invitation = Invitation.where(user: @user, flat: @flat).first
@@ -73,5 +73,13 @@ class InvitationsController < ApplicationController
 
   def set_flat
     @flat = Flat.find(params[:flat_id])
+  end
+
+  def find_or_create_user(email)
+    user = User.find_by(email: email)
+    if user.nil?
+      user = User.create(email: email, password: SecureRandom.hex(10), nickname: email.split('@').first)
+    end
+    user
   end
 end
